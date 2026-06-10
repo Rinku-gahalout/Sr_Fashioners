@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        view()->composer('wl-admin.layouts.sidebar', function ($view) {
+            $categories = Category::with('subcategories')->get();
+            $view->with('categories', $categories);
+        });
     }
 }
