@@ -18,17 +18,22 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
-        $this->call([
-            FittingSeeder::class,
-        ]);
+        // $this->call([
+        //     FittingSeeder::class,
+        // ]);
 
-        $this->call([
-            OrderSeeder::class,
-        ]);
+        // $this->call([
+        //     OrderSeeder::class,
+        // ]);
+
+            $this->call([
+        ProductSeeder::class,
+        ProductImageSeeder::class,
+    ]);
     }
 }

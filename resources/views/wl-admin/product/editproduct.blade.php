@@ -3,8 +3,8 @@
 @push('styles')
     <style>
         /* ══════════════════════════════
-           PAGE HEADER
-        ══════════════════════════════ */
+                   PAGE HEADER
+                ══════════════════════════════ */
         .page-top {
             display: flex;
             align-items: center;
@@ -62,8 +62,8 @@
         }
 
         /* ══════════════════════════════
-           LAYOUT GRID
-        ══════════════════════════════ */
+                   LAYOUT GRID
+                ══════════════════════════════ */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 340px;
@@ -72,8 +72,8 @@
         }
 
         /* ══════════════════════════════
-           SECTION CARDS
-        ══════════════════════════════ */
+                   SECTION CARDS
+                ══════════════════════════════ */
         .form-card {
             background: #fff;
             border-radius: 16px;
@@ -125,8 +125,8 @@
         }
 
         /* ══════════════════════════════
-           FORM ELEMENTS
-        ══════════════════════════════ */
+                   FORM ELEMENTS
+                ══════════════════════════════ */
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -221,11 +221,21 @@
             pointer-events: none;
         }
 
-        .input-prefix { left: 13px; }
-        .input-suffix { right: 13px; }
+        .input-prefix {
+            left: 13px;
+        }
 
-        .input-wrap .form-control.has-prefix { padding-left: 30px; }
-        .input-wrap .form-control.has-suffix { padding-right: 38px; }
+        .input-suffix {
+            right: 13px;
+        }
+
+        .input-wrap .form-control.has-prefix {
+            padding-left: 30px;
+        }
+
+        .input-wrap .form-control.has-suffix {
+            padding-right: 38px;
+        }
 
         /* Helper text */
         .form-hint {
@@ -258,8 +268,8 @@
         }
 
         /* ══════════════════════════════
-           SKU GENERATOR
-        ══════════════════════════════ */
+                   SKU GENERATOR
+                ══════════════════════════════ */
         .sku-row {
             display: flex;
             gap: 8px;
@@ -293,8 +303,8 @@
         }
 
         /* ══════════════════════════════
-           PRICE CALCULATOR
-        ══════════════════════════════ */
+                   PRICE CALCULATOR
+                ══════════════════════════════ */
         .price-preview {
             background: linear-gradient(135deg, #fff7ed, #fff3e0);
             border: 1.5px solid #fed7aa;
@@ -308,7 +318,9 @@
             gap: 12px;
         }
 
-        .price-preview-item { text-align: center; }
+        .price-preview-item {
+            text-align: center;
+        }
 
         .price-preview-item .val {
             font-size: 18px;
@@ -324,9 +336,17 @@
             margin-top: 2px;
         }
 
-        .price-preview-item .val.saving  { color: #16a34a; }
-        .price-preview-item .val.discount { color: #DC410A; }
-        .price-preview-item .val.orange   { color: #EB7405; }
+        .price-preview-item .val.saving {
+            color: #16a34a;
+        }
+
+        .price-preview-item .val.discount {
+            color: #DC410A;
+        }
+
+        .price-preview-item .val.orange {
+            color: #EB7405;
+        }
 
         .price-divider {
             width: 1px;
@@ -335,8 +355,8 @@
         }
 
         /* ══════════════════════════════
-           STOCK THRESHOLDS
-        ══════════════════════════════ */
+                   STOCK THRESHOLDS
+                ══════════════════════════════ */
         .threshold-note {
             display: flex;
             align-items: flex-start;
@@ -359,8 +379,8 @@
         }
 
         /* ══════════════════════════════
-           SIZE CHART
-        ══════════════════════════════ */
+                   SIZE CHART
+                ══════════════════════════════ */
         .size-grid {
             display: flex;
             flex-wrap: wrap;
@@ -368,7 +388,9 @@
             margin-top: 4px;
         }
 
-        .size-chip { position: relative; }
+        .size-chip {
+            position: relative;
+        }
 
         .size-chip input[type="checkbox"] {
             position: absolute;
@@ -407,7 +429,7 @@
             font-weight: 500;
         }
 
-        .size-chip input:checked + label {
+        .size-chip input:checked+label {
             border-color: #EB7405;
             background: linear-gradient(135deg, #fff7ed, #fff3e0);
             color: #EB7405;
@@ -420,8 +442,8 @@
         }
 
         /* ══════════════════════════════
-           COLOR SWATCHES
-        ══════════════════════════════ */
+                   COLOR SWATCHES
+                ══════════════════════════════ */
         .color-grid {
             display: flex;
             flex-wrap: wrap;
@@ -429,7 +451,9 @@
             margin-top: 4px;
         }
 
-        .color-chip { position: relative; }
+        .color-chip {
+            position: relative;
+        }
 
         .color-chip input[type="checkbox"] {
             position: absolute;
@@ -461,7 +485,7 @@
             flex-shrink: 0;
         }
 
-        .color-chip input:checked + label {
+        .color-chip input:checked+label {
             border-color: #EB7405;
             color: #EB7405;
             background: #fff7ed;
@@ -473,8 +497,8 @@
         }
 
         /* ══════════════════════════════
-           IMAGE UPLOAD
-        ══════════════════════════════ */
+                   IMAGE UPLOAD
+                ══════════════════════════════ */
         .image-upload-zone {
             border: 2px dashed #e2e8f0;
             border-radius: 14px;
@@ -581,7 +605,9 @@
             transition: .2s;
         }
 
-        .img-preview-wrap .img-remove:hover { background: #dc2626; }
+        .img-preview-wrap .img-remove:hover {
+            background: #dc2626;
+        }
 
         .img-preview-wrap .img-main-badge {
             position: absolute;
@@ -598,8 +624,8 @@
         }
 
         /* ══════════════════════════════
-           STATUS TOGGLE
-        ══════════════════════════════ */
+                   STATUS TOGGLE
+                ══════════════════════════════ */
         .toggle-group {
             display: flex;
             flex-direction: column;
@@ -617,7 +643,9 @@
             transition: .25s;
         }
 
-        .toggle-option:hover { border-color: #EB7405; }
+        .toggle-option:hover {
+            border-color: #EB7405;
+        }
 
         .toggle-option-left {
             display: flex;
@@ -635,9 +663,20 @@
             font-size: 18px;
         }
 
-        .toggle-option-icon.active-icon   { background: #dcfce7; color: #16a34a; }
-        .toggle-option-icon.inactive-icon { background: #fee2e2; color: #dc2626; }
-        .toggle-option-icon.draft-icon    { background: #fef9c3; color: #ca8a04; }
+        .toggle-option-icon.active-icon {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .toggle-option-icon.inactive-icon {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .toggle-option-icon.draft-icon {
+            background: #fef9c3;
+            color: #ca8a04;
+        }
 
         .toggle-option-text strong {
             font-size: 13px;
@@ -659,8 +698,8 @@
         }
 
         /* ══════════════════════════════
-           TAGS INPUT
-        ══════════════════════════════ */
+                   TAGS INPUT
+                ══════════════════════════════ */
         .tags-wrap {
             display: flex;
             flex-wrap: wrap;
@@ -706,7 +745,9 @@
             opacity: .7;
         }
 
-        .tag-remove:hover { opacity: 1; }
+        .tag-remove:hover {
+            opacity: 1;
+        }
 
         .tag-input {
             border: none;
@@ -718,11 +759,13 @@
             flex: 1;
         }
 
-        .tag-input::placeholder { color: #c0c8d8; }
+        .tag-input::placeholder {
+            color: #c0c8d8;
+        }
 
         /* ══════════════════════════════
-           SUMMARY CARD (sidebar)
-        ══════════════════════════════ */
+                   SUMMARY CARD (sidebar)
+                ══════════════════════════════ */
         .summary-row {
             display: flex;
             align-items: center;
@@ -732,7 +775,9 @@
             font-size: 13px;
         }
 
-        .summary-row:last-child { border-bottom: none; }
+        .summary-row:last-child {
+            border-bottom: none;
+        }
 
         .summary-row .s-key {
             color: #94a3b8;
@@ -747,11 +792,13 @@
             word-break: break-word;
         }
 
-        .summary-row .s-val.orange { color: #EB7405; }
+        .summary-row .s-val.orange {
+            color: #EB7405;
+        }
 
         /* ══════════════════════════════
-           FORM ACTIONS
-        ══════════════════════════════ */
+                   FORM ACTIONS
+                ══════════════════════════════ */
         .form-actions {
             display: flex;
             flex-direction: column;
@@ -857,7 +904,9 @@
             line-height: 1.5;
         }
 
-        .tip-item:last-child { margin-bottom: 0; }
+        .tip-item:last-child {
+            margin-bottom: 0;
+        }
 
         .tip-item i {
             font-size: 15px;
@@ -867,8 +916,8 @@
         }
 
         /* ══════════════════════════════
-           VALIDATION STATES
-        ══════════════════════════════ */
+                   VALIDATION STATES
+                ══════════════════════════════ */
         .form-control.is-invalid {
             border-color: #dc2626;
             box-shadow: 0 0 0 3px rgba(220, 38, 38, .1);
@@ -883,24 +932,80 @@
             gap: 4px;
         }
 
+        .gallery-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        .gallery-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .delete-image-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 22px;
+            height: 22px;
+            border: none;
+            border-radius: 50%;
+            background: #ef4444;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .delete-image-btn:hover {
+            background: #dc2626;
+        }
+
         /* ══════════════════════════════
-           RESPONSIVE
-        ══════════════════════════════ */
+                   RESPONSIVE
+                ══════════════════════════════ */
         @media (max-width: 1100px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .sidebar-col { display: contents; }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-col {
+                display: contents;
+            }
         }
 
         @media (max-width: 768px) {
-            .form-row { grid-template-columns: 1fr; }
-            .form-row.cols-3 { grid-template-columns: 1fr 1fr; }
-            .image-preview-grid { grid-template-columns: repeat(3, 1fr); }
-            .page-top { flex-direction: column; align-items: flex-start; }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row.cols-3 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .image-preview-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .page-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
 
         @media (max-width: 480px) {
-            .form-row.cols-3 { grid-template-columns: 1fr; }
-            .image-preview-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-row.cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .image-preview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 @endpush
@@ -910,13 +1015,13 @@
     {{-- ── Page Top ── --}}
     <div class="page-top">
         <div class="page-top-left">
-            <h2>Add New Product</h2>
+            <h2>Edit Product</h2>
             <div class="breadcrumb-bar">
                 <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                 <span>/</span>
                 <a href="{{ route('admin.product') }}">Products</a>
                 <span>/</span>
-                <span>Add New</span>
+                <span>Edit</span>
             </div>
         </div>
         <a href="{{ route('admin.product') }}" class="btn-back">
@@ -926,8 +1031,10 @@
     </div>
 
     {{-- ── Main Form ── --}}
-    <form action="{{ route('store.product') }}" method="POST" enctype="multipart/form-data" id="addProductForm">
+    <form action="{{ route('update.product', $product->id) }}" method="POST" enctype="multipart/form-data"
+        id="addProductForm">
         @csrf
+        @method('PUT')
 
         <div class="form-grid">
 
@@ -955,8 +1062,7 @@
                             </label>
                             <input type="text" name="name" id="productName"
                                 class="form-control @error('name') is-invalid @enderror"
-                                placeholder="e.g. Classic Comfort Chino Pants"
-                                value="{{ old('name') }}"
+                                placeholder="e.g. Classic Comfort Chino Pants" value="{{ old('name', $product->name) }}"
                                 maxlength="150" required>
                             <div class="char-counter"><span id="nameCount">0</span> / 150</div>
                             @error('name')
@@ -972,9 +1078,8 @@
                             </label>
                             <div class="sku-row">
                                 <input type="text" name="sku" id="skuField"
-                                    class="form-control @error('sku') is-invalid @enderror"
-                                    placeholder="e.g. SRF-0001"
-                                    value="{{ old('sku') }}" required>
+                                    class="form-control @error('sku') is-invalid @enderror" placeholder="e.g. SRF-0001"
+                                    value="{{ old('sku', $product->sku) }}" required>
                                 <button type="button" class="btn-generate" id="btnGenerateSKU">
                                     <i class='bx bx-refresh'></i> Auto Generate
                                 </button>
@@ -996,7 +1101,7 @@
                             <input type="text" name="short_description"
                                 class="form-control @error('short_description') is-invalid @enderror"
                                 placeholder="A brief one-line summary of the product…"
-                                value="{{ old('short_description') }}" maxlength="250">
+                                value="{{ old('short_description', $product->short_description) }}" maxlength="250">
                             <span class="form-hint">
                                 <i class='bx bx-info-circle'></i>Shown on product listing cards. Max 250 characters.
                             </span>
@@ -1011,9 +1116,8 @@
                                 <i class='bx bx-file-blank'></i>
                                 Full Description
                             </label>
-                            <textarea name="description" rows="5"
-                                class="form-control @error('description') is-invalid @enderror"
-                                placeholder="Describe the product in detail — fabric, features, occasion, care instructions…">{{ old('description') }}</textarea>
+                            <textarea name="description" rows="5" class="form-control @error('description') is-invalid @enderror"
+                                placeholder="Describe the product in detail — fabric, features, occasion, care instructions…">{{ old('description', $product->description) }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
                             @enderror
@@ -1046,7 +1150,7 @@
                                     <option value="">— Select Category —</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
-                                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                            {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
                                             {{ $category->name }}
                                         </option>
                                     @endforeach
@@ -1068,13 +1172,14 @@
                                     @foreach ($subcategories as $subcategory)
                                         <option value="{{ $subcategory->id }}"
                                             data-category="{{ $subcategory->category_id }}"
-                                            {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
+                                            {{ old('subcategory_id', $product->subcategory_id) == $subcategory->id ? 'selected' : '' }}>
                                             {{ $subcategory->name }}
                                         </option>
                                     @endforeach
                                 </select>
                                 @error('subcategory_id')
-                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
+                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
 
@@ -1090,16 +1195,31 @@
                                 <select name="fabric" id="productFabric"
                                     class="form-control @error('fabric') is-invalid @enderror">
                                     <option value="">— Select Fabric —</option>
-                                    <option value="100_cotton"   {{ old('fabric') == '100_cotton'   ? 'selected' : '' }}>100% Cotton</option>
-                                    <option value="cotton_blend" {{ old('fabric') == 'cotton_blend' ? 'selected' : '' }}>Cotton Blend</option>
-                                    <option value="linen"        {{ old('fabric') == 'linen'        ? 'selected' : '' }}>Linen</option>
-                                    <option value="denim"        {{ old('fabric') == 'denim'        ? 'selected' : '' }}>Denim</option>
-                                    <option value="polyester"    {{ old('fabric') == 'polyester'    ? 'selected' : '' }}>Polyester</option>
-                                    <option value="lycra_blend"  {{ old('fabric') == 'lycra_blend'  ? 'selected' : '' }}>Lycra Blend</option>
-                                    <option value="terry_cotton" {{ old('fabric') == 'terry_cotton' ? 'selected' : '' }}>Terry Cotton</option>
+                                    <option value="100_cotton"
+                                        {{ old('fabric', $product->fabric) == '100_cotton' ? 'selected' : '' }}>100%
+                                        Cotton</option>
+                                    <option value="cotton_blend"
+                                        {{ old('fabric', $product->fabric) == 'cotton_blend' ? 'selected' : '' }}>Cotton
+                                        Blend</option>
+                                    <option value="linen"
+                                        {{ old('fabric', $product->fabric) == 'linen' ? 'selected' : '' }}>Linen
+                                    </option>
+                                    <option value="denim"
+                                        {{ old('fabric', $product->fabric) == 'denim' ? 'selected' : '' }}>Denim
+                                    </option>
+                                    <option value="polyester"
+                                        {{ old('fabric', $product->fabric) == 'polyester' ? 'selected' : '' }}>Polyester
+                                    </option>
+                                    <option value="lycra_blend"
+                                        {{ old('fabric', $product->fabric) == 'lycra_blend' ? 'selected' : '' }}>Lycra
+                                        Blend</option>
+                                    <option value="terry_cotton"
+                                        {{ old('fabric', $product->fabric) == 'terry_cotton' ? 'selected' : '' }}>Terry
+                                        Cotton</option>
                                 </select>
                                 @error('fabric')
-                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
+                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -1116,7 +1236,8 @@
                                 <input type="text" id="tagInput" class="tag-input"
                                     placeholder="Type a tag and press Enter or comma…">
                             </div>
-                            <input type="hidden" name="tags" id="tagsHidden" value="{{ old('tags') }}">
+                            <input type="hidden" name="tags" id="tagsHidden"
+                                value="{{ old('tags', $product->tags) }}">
                             <span class="form-hint">
                                 <i class='bx bx-info-circle'></i>Press Enter or comma to add a tag. Helps with search.
                             </span>
@@ -1149,10 +1270,11 @@
                                     <input type="number" name="mrp" id="mrpField"
                                         class="form-control has-prefix @error('mrp') is-invalid @enderror"
                                         placeholder="0.00" min="0" step="0.01"
-                                        value="{{ old('mrp') }}" required>
+                                        value="{{ old('mrp', $product->mrp) }}" required>
                                 </div>
                                 @error('mrp')
-                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
+                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
 
@@ -1166,11 +1288,12 @@
                                     <input type="number" name="discount_percent" id="discountField"
                                         class="form-control has-suffix @error('discount_percent') is-invalid @enderror"
                                         placeholder="0" min="0" max="100"
-                                        value="{{ old('discount_percent', 0) }}">
+                                        value="{{ old('discount_percent', $product->discount_percent) }}">
                                     <span class="input-suffix">%</span>
                                 </div>
                                 @error('discount_percent')
-                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
+                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
 
@@ -1185,10 +1308,11 @@
                                     <input type="number" name="selling_price" id="sellingPriceField"
                                         class="form-control has-prefix @error('selling_price') is-invalid @enderror"
                                         placeholder="0.00" min="0" step="0.01"
-                                        value="{{ old('selling_price') }}" required>
+                                        value="{{ old('selling_price', $product->selling_price) }}" required>
                                 </div>
                                 @error('selling_price')
-                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
+                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
 
@@ -1243,11 +1367,12 @@
                                     <input type="number" name="stock_quantity" id="stockField"
                                         class="form-control has-suffix @error('stock_quantity') is-invalid @enderror"
                                         placeholder="0" min="0"
-                                        value="{{ old('stock_quantity', 0) }}" required>
+                                        value="{{ old('stock_quantity', $product->stock_quantity) }}" required>
                                     <span class="input-suffix">units</span>
                                 </div>
                                 @error('stock_quantity')
-                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
+                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
 
@@ -1261,11 +1386,12 @@
                                     <input type="number" name="low_stock_threshold"
                                         class="form-control has-suffix @error('low_stock_threshold') is-invalid @enderror"
                                         placeholder="10" min="0"
-                                        value="{{ old('low_stock_threshold', 10) }}">
+                                        value="{{ old('low_stock_threshold', $product->low_stock_threshold) }}">
                                     <span class="input-suffix">units</span>
                                 </div>
                                 @error('low_stock_threshold')
-                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
+                                    <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
 
@@ -1275,7 +1401,8 @@
                             <i class='bx bx-bulb'></i>
                             <div>
                                 When stock falls below the <strong>Low Stock Alert</strong> threshold, the product status
-                                will automatically change to <strong>Low Stock</strong> and you'll receive a dashboard alert.
+                                will automatically change to <strong>Low Stock</strong> and you'll receive a dashboard
+                                alert.
                             </div>
                         </div>
 
@@ -1285,90 +1412,129 @@
                 {{-- 5. Sizes & Colors --}}
                 <div class="form-card">
                     <div class="card-head">
-                        <div class="card-head-icon"><i class='bx bx-palette'></i></div>
+                        <div class="card-head-icon">
+                            <i class='bx bx-palette'></i>
+                        </div>
                         <div>
-                            <h5>Sizes &amp; Colors</h5>
+                            <h5>Sizes & Colors</h5>
                             <p>Available variants for this product</p>
                         </div>
                     </div>
+
                     <div class="card-body">
 
+                        @php
+                            $selectedSizes = old('sizes', $product->sizes ?? []);
+                            $selectedColors = old('colors', $product->colors ?? []);
+
+                            $sizes = [
+                                ['val' => '28', 'sub' => 'Waist 28'],
+                                ['val' => '30', 'sub' => 'Waist 30'],
+                                ['val' => '32', 'sub' => 'Waist 32'],
+                                ['val' => '34', 'sub' => 'Waist 34'],
+                                ['val' => '36', 'sub' => 'Waist 36'],
+                                ['val' => '38', 'sub' => 'Waist 38'],
+                                ['val' => '40', 'sub' => 'Waist 40'],
+                                ['val' => '42', 'sub' => 'Waist 42'],
+                                ['val' => 'S', 'sub' => 'Small'],
+                                ['val' => 'M', 'sub' => 'Medium'],
+                                ['val' => 'L', 'sub' => 'Large'],
+                                ['val' => 'XL', 'sub' => 'X-Large'],
+                            ];
+
+                            $colors = [
+                                ['val' => 'black', 'label' => 'Black', 'hex' => '#1a1a1a'],
+                                ['val' => 'white', 'label' => 'White', 'hex' => '#f0f0f0'],
+                                ['val' => 'navy', 'label' => 'Navy Blue', 'hex' => '#1e3a5f'],
+                                ['val' => 'grey', 'label' => 'Grey', 'hex' => '#6b7280'],
+                                ['val' => 'khaki', 'label' => 'Khaki', 'hex' => '#c3a882'],
+                                ['val' => 'olive', 'label' => 'Olive', 'hex' => '#6b7c48'],
+                                ['val' => 'brown', 'label' => 'Brown', 'hex' => '#7c5c3a'],
+                                ['val' => 'wine', 'label' => 'Wine', 'hex' => '#722f37'],
+                                ['val' => 'beige', 'label' => 'Beige', 'hex' => '#e8d5b7'],
+                                ['val' => 'dark_blue', 'label' => 'Dark Blue', 'hex' => '#1e2a6e'],
+                            ];
+                        @endphp
+
                         {{-- Sizes --}}
-                        <div class="form-group" style="margin-bottom:22px;">
-                            <label><i class='bx bx-ruler'></i> Available Sizes</label>
+                        <div class="form-group mb-4">
+
+                            <label>
+                                <i class='bx bx-ruler'></i>
+                                Available Sizes
+                            </label>
+
                             <div class="size-grid">
-                                @php
-                                    $sizes = [
-                                        ['val' => '28', 'sub' => 'Waist 28'],
-                                        ['val' => '30', 'sub' => 'Waist 30'],
-                                        ['val' => '32', 'sub' => 'Waist 32'],
-                                        ['val' => '34', 'sub' => 'Waist 34'],
-                                        ['val' => '36', 'sub' => 'Waist 36'],
-                                        ['val' => '38', 'sub' => 'Waist 38'],
-                                        ['val' => '40', 'sub' => 'Waist 40'],
-                                        ['val' => '42', 'sub' => 'Waist 42'],
-                                        ['val' => 'S',  'sub' => 'Small'],
-                                        ['val' => 'M',  'sub' => 'Medium'],
-                                        ['val' => 'L',  'sub' => 'Large'],
-                                        ['val' => 'XL', 'sub' => 'X-Large'],
-                                    ];
-                                    $oldSizes = old('sizes', []);
-                                @endphp
+
                                 @foreach ($sizes as $size)
                                     <div class="size-chip">
-                                        <input type="checkbox" name="sizes[]"
-                                            id="size_{{ $size['val'] }}"
+
+                                        <input type="checkbox" name="sizes[]" id="size_{{ $size['val'] }}"
                                             value="{{ $size['val'] }}"
-                                            {{ in_array($size['val'], $oldSizes) ? 'checked' : '' }}>
+                                            {{ in_array($size['val'], $selectedSizes) ? 'checked' : '' }}>
+
                                         <label for="size_{{ $size['val'] }}">
-                                            <span class="size-lbl">{{ $size['val'] }}</span>
-                                            <span class="size-sub">{{ $size['sub'] }}</span>
+
+                                            <span class="size-lbl">
+                                                {{ $size['val'] }}
+                                            </span>
+
+                                            <span class="size-sub">
+                                                {{ $size['sub'] }}
+                                            </span>
+
                                         </label>
+
                                     </div>
                                 @endforeach
+
                             </div>
-                            <span class="form-hint" style="margin-top:8px;">
-                                <i class='bx bx-info-circle'></i>Select all sizes this product is available in.
+
+                            <span class="form-hint">
+                                <i class='bx bx-info-circle'></i>
+                                Select all sizes this product is available in.
                             </span>
+
                         </div>
 
                         <hr class="form-divider">
 
                         {{-- Colors --}}
                         <div class="form-group">
-                            <label><i class='bx bx-color-fill'></i> Available Colors</label>
+
+                            <label>
+                                <i class='bx bx-color-fill'></i>
+                                Available Colors
+                            </label>
+
                             <div class="color-grid">
-                                @php
-                                    $colors = [
-                                        ['val' => 'black',     'label' => 'Black',     'hex' => '#1a1a1a'],
-                                        ['val' => 'white',     'label' => 'White',     'hex' => '#f0f0f0'],
-                                        ['val' => 'navy',      'label' => 'Navy Blue', 'hex' => '#1e3a5f'],
-                                        ['val' => 'grey',      'label' => 'Grey',      'hex' => '#6b7280'],
-                                        ['val' => 'khaki',     'label' => 'Khaki',     'hex' => '#c3a882'],
-                                        ['val' => 'olive',     'label' => 'Olive',     'hex' => '#6b7c48'],
-                                        ['val' => 'brown',     'label' => 'Brown',     'hex' => '#7c5c3a'],
-                                        ['val' => 'wine',      'label' => 'Wine',      'hex' => '#722f37'],
-                                        ['val' => 'beige',     'label' => 'Beige',     'hex' => '#e8d5b7'],
-                                        ['val' => 'dark_blue', 'label' => 'Dark Blue', 'hex' => '#1e2a6e'],
-                                    ];
-                                    $oldColors = old('colors', []);
-                                @endphp
+
                                 @foreach ($colors as $color)
                                     <div class="color-chip">
-                                        <input type="checkbox" name="colors[]"
-                                            id="color_{{ $color['val'] }}"
+
+                                        <input type="checkbox" name="colors[]" id="color_{{ $color['val'] }}"
                                             value="{{ $color['val'] }}"
-                                            {{ in_array($color['val'], $oldColors) ? 'checked' : '' }}>
+                                            {{ in_array($color['val'], $selectedColors) ? 'checked' : '' }}>
+
                                         <label for="color_{{ $color['val'] }}">
-                                            <span class="color-dot" style="background:{{ $color['hex'] }};"></span>
+
+                                            <span class="color-dot" style="background:{{ $color['hex'] }};">
+                                            </span>
+
                                             {{ $color['label'] }}
+
                                         </label>
+
                                     </div>
                                 @endforeach
+
                             </div>
-                            <span class="form-hint" style="margin-top:8px;">
-                                <i class='bx bx-info-circle'></i>Select all colors available for this product.
+
+                            <span class="form-hint">
+                                <i class='bx bx-info-circle'></i>
+                                Select all colors available for this product.
                             </span>
+
                         </div>
 
                     </div>
@@ -1391,25 +1557,57 @@
                                 <i class='bx bx-image'></i>
                                 Main Product Image <span class="req">*</span>
                             </label>
+
+                            {{-- Current Image --}}
+                            @if ($product->main_image)
+                                <div class="mb-3">
+                                    <img src="{{ asset($product->main_image) }}" alt="{{ $product->name }}"
+                                        style="
+                    width:180px;
+                    height:180px;
+                    object-fit:cover;
+                    border-radius:12px;
+                    border:1px solid #e5e7eb;
+                ">
+                                </div>
+                            @endif
+
                             <div class="image-upload-zone" id="mainImageZone">
-                                <input type="file" name="main_image" id="mainImageInput"
-                                    accept="image/*" onchange="previewMainImage(this)">
+
+                                <input type="file" name="main_image" id="mainImageInput" accept="image/*"
+                                    onchange="previewMainImage(this)">
+
                                 <div id="mainUploadPlaceholder">
-                                    <div class="upload-icon"><i class='bx bx-cloud-upload'></i></div>
+                                    <div class="upload-icon">
+                                        <i class='bx bx-cloud-upload'></i>
+                                    </div>
+
                                     <h6>Drop main image here or click to browse</h6>
-                                    <p>This is the primary product thumbnail shown in listings</p>
-                                    <span class="upload-badge">JPG, PNG, WebP — Max 2MB</span>
-                                </div>
-                                <div id="mainImagePreviewWrap" style="display:none; pointer-events:none;">
-                                    <img id="mainImagePreview" src="" alt="Preview"
-                                        style="max-height:200px; border-radius:10px; object-fit:contain;">
-                                    <p style="font-size:12px; color:#EB7405; margin-top:10px; font-weight:600;">
-                                        <i class='bx bx-check-circle'></i> Main image selected. Click to change.
+
+                                    <p>
+                                        Leave empty if you don't want to change the image
                                     </p>
+
+                                    <span class="upload-badge">
+                                        JPG, PNG, WebP — Max 2MB
+                                    </span>
                                 </div>
+
+                                <div id="mainImagePreviewWrap" style="display:none;">
+                                    <img id="mainImagePreview" src="" alt="Preview"
+                                        style="
+                    max-height:200px;
+                    border-radius:10px;
+                    object-fit:contain;
+                ">
+                                </div>
+
                             </div>
+
                             @error('main_image')
-                                <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
 
@@ -1419,17 +1617,44 @@
                                 <i class='bx bx-image-alt'></i>
                                 Gallery Images <span style="color:#94a3b8; font-weight:400;">(Optional)</span>
                             </label>
+
+                            {{-- EXISTING IMAGES --}}
+                            @if ($product->images->count())
+                                <div class="existing-gallery"
+                                    style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+
+                                    @foreach ($product->images as $image)
+                                        <div class="gallery-item">
+                                            <img src="{{ asset($image->image_path) }}" width="80" height="80">
+
+                                            <button type="button" class="delete-image-btn"
+                                                onclick="deleteGalleryImage({{ $image->id }})">
+                                                <i class='bx bx-x'></i>
+                                            </button>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            @endif
+
+                            {{-- UPLOAD NEW --}}
                             <div class="image-upload-zone" id="galleryZone">
-                                <input type="file" name="gallery_images[]" id="galleryInput"
-                                    accept="image/*" multiple onchange="previewGallery(this)">
+                                <input type="file" name="gallery_images[]" id="galleryInput" accept="image/*"
+                                    multiple onchange="previewGallery(this)">
+
                                 <div class="upload-icon"><i class='bx bx-images'></i></div>
                                 <h6>Drop multiple images here</h6>
                                 <p>Upload up to 8 gallery images for product details page</p>
                                 <span class="upload-badge">Up to 8 images — JPG, PNG, WebP — Max 2MB each</span>
                             </div>
+
+                            {{-- NEW PREVIEW --}}
                             <div class="image-preview-grid" id="galleryPreviewGrid"></div>
+
                             @error('gallery_images')
-                                <div class="invalid-feedback"><i class='bx bx-error-circle'></i> {{ $message }}</div>
+                                <div class="invalid-feedback">
+                                    <i class='bx bx-error-circle'></i> {{ $message }}
+                                </div>
                             @enderror
                         </div>
 
@@ -1487,7 +1712,7 @@
                                     </div>
                                 </div>
                                 <input type="radio" name="status" value="active"
-                                    {{ old('status', 'active') == 'active' ? 'checked' : '' }}>
+                                    {{ old('status', $product->status) == 'active' ? 'checked' : '' }}>
                             </label>
 
                             <label class="toggle-option">
@@ -1501,7 +1726,7 @@
                                     </div>
                                 </div>
                                 <input type="radio" name="status" value="draft"
-                                    {{ old('status') == 'draft' ? 'checked' : '' }}>
+                                    {{ old('status', $product->status) == 'draft' ? 'checked' : '' }}>
                             </label>
 
                             <label class="toggle-option">
@@ -1515,7 +1740,7 @@
                                     </div>
                                 </div>
                                 <input type="radio" name="status" value="inactive"
-                                    {{ old('status') == 'inactive' ? 'checked' : '' }}>
+                                    {{ old('status', $product->status) == 'inactive' ? 'checked' : '' }}>
                             </label>
 
                         </div>
@@ -1587,273 +1812,308 @@
 
         </div>{{-- end .form-grid --}}
     </form>
-
+    <form id="deleteGalleryForm" method="POST" style="display:none;">
+        @csrf
+        @method('DELETE')
+    </form>
 @endsection
 
 @push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function () {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-    /* ═══════════════════════════════════════════════
-       HELPER — format number in Indian locale
-    ═══════════════════════════════════════════════ */
-    function inr(val, decimals) {
-        return '₹' + val.toLocaleString('en-IN', {
-            minimumFractionDigits: decimals || 0,
-            maximumFractionDigits: decimals || 0
-        });
-    }
-
-    /* ═══════════════════════════════════════════════
-       1. SKU AUTO-GENERATE
-    ═══════════════════════════════════════════════ */
-    document.getElementById('btnGenerateSKU').addEventListener('click', function () {
-        const rand = Math.floor(1000 + Math.random() * 9000);
-        document.getElementById('skuField').value = 'SRF-' + rand;
-        updateSummary();
-    });
-
-    /* ═══════════════════════════════════════════════
-       2. PRICE CALCULATOR
-       — MRP + Discount  →  Selling Price
-       — MRP + Selling   →  Discount %
-    ═══════════════════════════════════════════════ */
-    const mrpField      = document.getElementById('mrpField');
-    const discountField = document.getElementById('discountField');
-    const sellingField  = document.getElementById('sellingPriceField');
-
-    function calcPriceFromDiscount() {
-        const mrp      = parseFloat(mrpField.value)      || 0;
-        const discount = parseFloat(discountField.value) || 0;
-        const selling  = +(mrp - (mrp * discount / 100)).toFixed(2);
-        const saving   = +(mrp - selling).toFixed(2);
-
-        sellingField.value = selling.toFixed(2);
-        updatePricePreview(mrp, discount, selling, saving);
-        updateSummary();
-    }
-
-    function calcDiscountFromPrice() {
-        const mrp     = parseFloat(mrpField.value)   || 0;
-        const selling = parseFloat(sellingField.value) || 0;
-
-        if (mrp > 0 && selling >= 0 && selling <= mrp) {
-            const discount = +((mrp - selling) / mrp * 100).toFixed(1);
-            const saving   = +(mrp - selling).toFixed(2);
-            discountField.value = discount;
-            updatePricePreview(mrp, discount, selling, saving);
-        }
-        updateSummary();
-    }
-
-    function updatePricePreview(mrp, discount, selling, saving) {
-        document.getElementById('previewMRP').textContent      = inr(mrp);
-        document.getElementById('previewDiscount').textContent = discount + '%';
-        document.getElementById('previewSelling').textContent  = inr(selling, 2);
-        document.getElementById('previewSaving').textContent   = inr(saving,  2);
-    }
-
-    mrpField.addEventListener('input',      calcPriceFromDiscount);
-    discountField.addEventListener('input', calcPriceFromDiscount);
-    sellingField.addEventListener('input',  calcDiscountFromPrice);
-
-    /* ═══════════════════════════════════════════════
-       3. LIVE SUMMARY
-    ═══════════════════════════════════════════════ */
-    function updateSummary() {
-        /* Elements */
-        const nameEl     = document.getElementById('productName');
-        const skuEl      = document.getElementById('skuField');
-        const catEl      = document.getElementById('productCategory');
-        const fabricEl   = document.getElementById('productFabric');
-        const stockEl    = document.getElementById('stockField');
-
-        /* Derived text */
-        const catText    = catEl?.selectedIndex > 0
-                            ? catEl.options[catEl.selectedIndex].text
-                            : '—';
-        const fabricText = fabricEl?.selectedIndex > 0
-                            ? fabricEl.options[fabricEl.selectedIndex].text
-                            : '—';
-
-        const mrp = parseFloat(mrpField.value)   || 0;
-        const sp  = parseFloat(sellingField.value) || 0;
-
-        /* Update DOM */
-        document.getElementById('sumName').textContent     = nameEl.value.trim()  || '—';
-        document.getElementById('sumSKU').textContent      = skuEl.value.trim()   || '—';
-        document.getElementById('sumCategory').textContent = catText;
-        document.getElementById('sumFabric').textContent   = fabricText;
-        document.getElementById('sumMRP').textContent      = mrp > 0 ? inr(mrp)      : '—';
-        document.getElementById('sumPrice').textContent    = sp  > 0 ? inr(sp, 2)    : '—';
-        document.getElementById('sumStock').textContent    = stockEl.value
-                                                              ? stockEl.value + ' units'
-                                                              : '—';
-    }
-
-    /* Bind all summary-triggering fields */
-    const summaryFields = ['productName', 'skuField', 'stockField'];
-    summaryFields.forEach(function (id) {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('input', updateSummary);
-    });
-
-    const summarySELECTs = ['productCategory', 'productFabric'];
-    summarySELECTs.forEach(function (id) {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('change', updateSummary);
-    });
-
-    /* ═══════════════════════════════════════════════
-       4. NAME CHARACTER COUNTER
-    ═══════════════════════════════════════════════ */
-    document.getElementById('productName').addEventListener('input', function () {
-        document.getElementById('nameCount').textContent = this.value.length;
-    });
-
-    /* ═══════════════════════════════════════════════
-       5. SUBCATEGORY FILTER
-    ═══════════════════════════════════════════════ */
-    const categorySelect    = document.getElementById('productCategory');
-    const subcategorySelect = document.getElementById('productSubCategory');
-
-    function filterSubcategories() {
-        const selectedCatId = categorySelect.value;
-
-        Array.from(subcategorySelect.options).forEach(function (opt) {
-            if (opt.value === '') {
-                opt.style.display = '';   // always show placeholder
-                return;
+            /* ═══════════════════════════════════════════════
+               HELPER — format number in Indian locale
+            ═══════════════════════════════════════════════ */
+            function inr(val, decimals) {
+                return '₹' + val.toLocaleString('en-IN', {
+                    minimumFractionDigits: decimals || 0,
+                    maximumFractionDigits: decimals || 0
+                });
             }
-            opt.style.display = (opt.dataset.category == selectedCatId) ? '' : 'none';
-        });
 
-        // Reset selection whenever category changes
-        subcategorySelect.value = '';
-        updateSummary();
-    }
+            /* ═══════════════════════════════════════════════
+               1. SKU AUTO-GENERATE
+            ═══════════════════════════════════════════════ */
+            document.getElementById('btnGenerateSKU').addEventListener('click', function() {
+                const rand = Math.floor(1000 + Math.random() * 9000);
+                document.getElementById('skuField').value = 'SRF-' + rand;
+                updateSummary();
+            });
 
-    categorySelect.addEventListener('change', filterSubcategories);
+            /* ═══════════════════════════════════════════════
+               2. PRICE CALCULATOR
+               — MRP + Discount  →  Selling Price
+               — MRP + Selling   →  Discount %
+            ═══════════════════════════════════════════════ */
+            const mrpField = document.getElementById('mrpField');
+            const discountField = document.getElementById('discountField');
+            const sellingField = document.getElementById('sellingPriceField');
 
-    // Run once on load to restore old() state correctly
-    if (categorySelect.value) filterSubcategories();
+            function calcPriceFromDiscount() {
+                const mrp = parseFloat(mrpField.value) || 0;
+                const discount = parseFloat(discountField.value) || 0;
+                const selling = +(mrp - (mrp * discount / 100)).toFixed(2);
+                const saving = +(mrp - selling).toFixed(2);
 
-    /* ═══════════════════════════════════════════════
-       6. TAGS INPUT
-    ═══════════════════════════════════════════════ */
-    const tagInput  = document.getElementById('tagInput');
-    const tagsWrap  = document.getElementById('tagsWrap');
-    const tagsHidden = document.getElementById('tagsHidden');
-    let   tags      = [];
-
-    // Pre-populate tags from old() value
-    const oldTags = tagsHidden.value.trim();
-    if (oldTags) {
-        tags = oldTags.split(',').map(t => t.trim()).filter(Boolean);
-        renderTags();
-    }
-
-    tagsWrap.addEventListener('click', function () { tagInput.focus(); });
-
-    tagInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ',') {
-            e.preventDefault();
-            const val = this.value.trim().replace(/,/g, '');
-            if (val && !tags.includes(val)) {
-                tags.push(val);
-                renderTags();
+                sellingField.value = selling.toFixed(2);
+                updatePricePreview(mrp, discount, selling, saving);
+                updateSummary();
             }
-            this.value = '';
-        }
-        if (e.key === 'Backspace' && this.value === '' && tags.length) {
-            tags.pop();
-            renderTags();
-        }
-    });
 
-    function renderTags() {
-        document.querySelectorAll('#tagsWrap .tag-item').forEach(el => el.remove());
-        tags.forEach(function (t, i) {
-            const chip = document.createElement('span');
-            chip.className = 'tag-item';
-            chip.innerHTML = t +
-                '<button type="button" class="tag-remove" data-index="' + i + '">' +
-                '<i class="bx bx-x"></i></button>';
-            tagsWrap.insertBefore(chip, tagInput);
-        });
-        tagsHidden.value = tags.join(',');
-    }
+            function calcDiscountFromPrice() {
+                const mrp = parseFloat(mrpField.value) || 0;
+                const selling = parseFloat(sellingField.value) || 0;
 
-    tagsWrap.addEventListener('click', function (e) {
-        const btn = e.target.closest('.tag-remove');
-        if (btn) {
-            tags.splice(parseInt(btn.dataset.index), 1);
-            renderTags();
-        }
-    });
+                if (mrp > 0 && selling >= 0 && selling <= mrp) {
+                    const discount = +((mrp - selling) / mrp * 100).toFixed(1);
+                    const saving = +(mrp - selling).toFixed(2);
+                    discountField.value = discount;
+                    updatePricePreview(mrp, discount, selling, saving);
+                }
+                updateSummary();
+            }
 
-    /* ═══════════════════════════════════════════════
-       7. IMAGE PREVIEWS
-    ═══════════════════════════════════════════════ */
+            function updatePricePreview(mrp, discount, selling, saving) {
+                document.getElementById('previewMRP').textContent = inr(mrp);
+                document.getElementById('previewDiscount').textContent = discount + '%';
+                document.getElementById('previewSelling').textContent = inr(selling, 2);
+                document.getElementById('previewSaving').textContent = inr(saving, 2);
+            }
 
-    /* Main image */
-    function previewMainImage(input) {
-        if (!input.files || !input.files[0]) return;
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById('mainUploadPlaceholder').style.display = 'none';
-            const wrap = document.getElementById('mainImagePreviewWrap');
-            wrap.style.display    = 'block';
-            wrap.style.pointerEvents = 'none';
-            document.getElementById('mainImagePreview').src = e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
+            mrpField.addEventListener('input', calcPriceFromDiscount);
+            discountField.addEventListener('input', calcPriceFromDiscount);
+            sellingField.addEventListener('input', calcDiscountFromPrice);
 
-    document.getElementById('mainImageInput').addEventListener('change', function () {
-        previewMainImage(this);
-    });
+            /* ═══════════════════════════════════════════════
+               3. LIVE SUMMARY
+            ═══════════════════════════════════════════════ */
+            function updateSummary() {
+                /* Elements */
+                const nameEl = document.getElementById('productName');
+                const skuEl = document.getElementById('skuField');
+                const catEl = document.getElementById('productCategory');
+                const fabricEl = document.getElementById('productFabric');
+                const stockEl = document.getElementById('stockField');
 
-    /* Gallery images */
-    document.getElementById('galleryInput').addEventListener('change', function () {
-        const grid  = document.getElementById('galleryPreviewGrid');
-        const files = Array.from(this.files).slice(0, 8);
+                /* Derived text */
+                const catText = catEl?.selectedIndex > 0 ?
+                    catEl.options[catEl.selectedIndex].text :
+                    '—';
+                const fabricText = fabricEl?.selectedIndex > 0 ?
+                    fabricEl.options[fabricEl.selectedIndex].text :
+                    '—';
 
-        files.forEach(function (file, idx) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const wrap = document.createElement('div');
-                wrap.className = 'img-preview-wrap';
-                wrap.innerHTML =
-                    '<img src="' + e.target.result + '" alt="Gallery ' + (idx + 1) + '">' +
-                    '<button class="img-remove" type="button"><i class="bx bx-x"></i></button>' +
-                    (idx === 0 ? '<span class="img-main-badge">1st</span>' : '');
+                const mrp = parseFloat(mrpField.value) || 0;
+                const sp = parseFloat(sellingField.value) || 0;
 
-                wrap.querySelector('.img-remove').addEventListener('click', function () {
-                    wrap.remove();
+                /* Update DOM */
+                document.getElementById('sumName').textContent = nameEl.value.trim() || '—';
+                document.getElementById('sumSKU').textContent = skuEl.value.trim() || '—';
+                document.getElementById('sumCategory').textContent = catText;
+                document.getElementById('sumFabric').textContent = fabricText;
+                document.getElementById('sumMRP').textContent = mrp > 0 ? inr(mrp) : '—';
+                document.getElementById('sumPrice').textContent = sp > 0 ? inr(sp, 2) : '—';
+                document.getElementById('sumStock').textContent = stockEl.value ?
+                    stockEl.value + ' units' :
+                    '—';
+            }
+
+            /* Bind all summary-triggering fields */
+            const summaryFields = ['productName', 'skuField', 'stockField'];
+            summaryFields.forEach(function(id) {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('input', updateSummary);
+            });
+
+            const summarySELECTs = ['productCategory', 'productFabric'];
+            summarySELECTs.forEach(function(id) {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('change', updateSummary);
+            });
+
+            /* ═══════════════════════════════════════════════
+               4. NAME CHARACTER COUNTER
+            ═══════════════════════════════════════════════ */
+            document.getElementById('productName').addEventListener('input', function() {
+                document.getElementById('nameCount').textContent = this.value.length;
+            });
+
+            /* ═══════════════════════════════════════════════
+               5. SUBCATEGORY FILTER
+            ═══════════════════════════════════════════════ */
+            const categorySelect = document.getElementById('productCategory');
+            const subcategorySelect = document.getElementById('productSubCategory');
+
+            function filterSubcategories(reset = false) {
+
+                const selectedCatId = categorySelect.value;
+
+                Array.from(subcategorySelect.options).forEach(function(opt) {
+
+                    if (opt.value === '') {
+                        opt.style.display = '';
+                        return;
+                    }
+
+                    opt.style.display =
+                        opt.dataset.category == selectedCatId ?
+                        '' :
+                        'none';
                 });
 
-                grid.appendChild(wrap);
-            };
-            reader.readAsDataURL(file);
-        });
-    });
+                // Only clear subcategory when user changes category
+                if (reset) {
+                    subcategorySelect.value = '';
+                }
+            }
 
-    /* Drag-and-drop visual feedback */
-    ['mainImageZone', 'galleryZone'].forEach(function (id) {
-        const zone = document.getElementById(id);
-        if (!zone) return;
-        zone.addEventListener('dragover',  function (e) { e.preventDefault(); zone.classList.add('dragover'); });
-        zone.addEventListener('dragleave', function ()  { zone.classList.remove('dragover'); });
-        zone.addEventListener('drop',      function ()  { zone.classList.remove('dragover'); });
-    });
+            categorySelect.addEventListener('change', function() {
+                filterSubcategories(true);
+            });
 
-    /* ═══════════════════════════════════════════════
-       INIT — run summary once to reflect old() values
-    ═══════════════════════════════════════════════ */
-    updateSummary();
-    calcPriceFromDiscount();
+            // Initial load
+            filterSubcategories(false);
 
-}); // end DOMContentLoaded
-</script>
+            /* ═══════════════════════════════════════════════
+               6. TAGS INPUT
+            ═══════════════════════════════════════════════ */
+            const tagInput = document.getElementById('tagInput');
+            const tagsWrap = document.getElementById('tagsWrap');
+            const tagsHidden = document.getElementById('tagsHidden');
+            let tags = [];
+
+            // Pre-populate tags from old() value
+            const oldTags = tagsHidden.value.trim();
+            if (oldTags) {
+                tags = oldTags.split(',').map(t => t.trim()).filter(Boolean);
+                renderTags();
+            }
+
+            tagsWrap.addEventListener('click', function() {
+                tagInput.focus();
+            });
+
+            tagInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    const val = this.value.trim().replace(/,/g, '');
+                    if (val && !tags.includes(val)) {
+                        tags.push(val);
+                        renderTags();
+                    }
+                    this.value = '';
+                }
+                if (e.key === 'Backspace' && this.value === '' && tags.length) {
+                    tags.pop();
+                    renderTags();
+                }
+            });
+
+            function renderTags() {
+                document.querySelectorAll('#tagsWrap .tag-item').forEach(el => el.remove());
+                tags.forEach(function(t, i) {
+                    const chip = document.createElement('span');
+                    chip.className = 'tag-item';
+                    chip.innerHTML = t +
+                        '<button type="button" class="tag-remove" data-index="' + i + '">' +
+                        '<i class="bx bx-x"></i></button>';
+                    tagsWrap.insertBefore(chip, tagInput);
+                });
+                tagsHidden.value = tags.join(',');
+            }
+
+            tagsWrap.addEventListener('click', function(e) {
+                const btn = e.target.closest('.tag-remove');
+                if (btn) {
+                    tags.splice(parseInt(btn.dataset.index), 1);
+                    renderTags();
+                }
+            });
+
+            /* ═══════════════════════════════════════════════
+               7. IMAGE PREVIEWS
+            ═══════════════════════════════════════════════ */
+
+            /* Main image */
+            function previewMainImage(input) {
+                if (!input.files || !input.files[0]) return;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('mainUploadPlaceholder').style.display = 'none';
+                    const wrap = document.getElementById('mainImagePreviewWrap');
+                    wrap.style.display = 'block';
+                    wrap.style.pointerEvents = 'none';
+                    document.getElementById('mainImagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+
+            document.getElementById('mainImageInput').addEventListener('change', function() {
+                previewMainImage(this);
+            });
+
+            /* Gallery images */
+            document.getElementById('galleryInput').addEventListener('change', function() {
+                const grid = document.getElementById('galleryPreviewGrid');
+                const files = Array.from(this.files).slice(0, 8);
+
+                files.forEach(function(file, idx) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const wrap = document.createElement('div');
+                        wrap.className = 'img-preview-wrap';
+                        wrap.innerHTML =
+                            '<img src="' + e.target.result + '" alt="Gallery ' + (idx + 1) +
+                            '">' +
+                            '<button class="img-remove" type="button"><i class="bx bx-x"></i></button>' +
+                            (idx === 0 ? '<span class="img-main-badge">1st</span>' : '');
+
+                        wrap.querySelector('.img-remove').addEventListener('click', function() {
+                            wrap.remove();
+                        });
+
+                        grid.appendChild(wrap);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            /* Drag-and-drop visual feedback */
+            ['mainImageZone', 'galleryZone'].forEach(function(id) {
+                const zone = document.getElementById(id);
+                if (!zone) return;
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    zone.classList.add('dragover');
+                });
+                zone.addEventListener('dragleave', function() {
+                    zone.classList.remove('dragover');
+                });
+                zone.addEventListener('drop', function() {
+                    zone.classList.remove('dragover');
+                });
+            });
+
+            /* ═══════════════════════════════════════════════
+               INIT — run summary once to reflect old() values
+            ═══════════════════════════════════════════════ */
+            updateSummary();
+            calcPriceFromDiscount();
+
+        }); // end DOMContentLoaded
+
+        function deleteGalleryImage(id) {
+
+            if (!confirm('Delete this image?')) {
+                return;
+            }
+
+            let form = document.getElementById('deleteGalleryForm');
+
+            form.action = `/admin/product/gallery-image/${id}`;
+
+            form.submit();
+        }
+    </script>
 @endpush

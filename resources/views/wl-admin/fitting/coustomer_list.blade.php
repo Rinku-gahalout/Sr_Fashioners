@@ -74,7 +74,7 @@
 
             <tbody>
 
-                <tr>
+                {{-- <tr>
                     <td>1</td>
                     <td>#ORD1001</td>
                     <td>Rahul Sharma</td>
@@ -141,7 +141,7 @@
                     <td>
     <span class="quantity-badge">10 Pairs</span>
 </td>
-                </tr>
+                </tr> --}}
 
             </tbody>
 

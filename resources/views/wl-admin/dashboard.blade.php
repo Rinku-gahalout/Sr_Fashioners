@@ -1,750 +1,860 @@
 @extends('wl-admin.layouts.app')
 
 @push('styles')
-<style>
-/* ── Page ──────────────────────────────────────────── */
-.dash-wrap{
-    padding:0;
-}
+    <style>
+        /* ── Page ──────────────────────────────────────────── */
+        .dash-wrap {
+            padding: 0;
+        }
 
-/* ── Top Bar ───────────────────────────────────────── */
-.top-bar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-bottom:28px;
-}
+        /* ── Top Bar ───────────────────────────────────────── */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
 
-.top-bar-left h2{
-    font-size:24px;
-    font-weight:700;
-    color:#1e0536;
-    margin:0;
-}
+        .top-bar-left h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e0536;
+            margin: 0;
+        }
 
-.top-bar-left p{
-    color:#64748b;
-    font-size:14px;
-    margin:4px 0 0;
-}
+        .top-bar-left p {
+            color: #64748b;
+            font-size: 14px;
+            margin: 4px 0 0;
+        }
 
-.top-bar-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.date-badge{
-    background:#fff;
-    border:1px solid #e2e8f0;
-    border-radius:10px;
-    padding:8px 16px;
-    font-size:13px;
-    color:#475569;
-    display:flex;
-    align-items:center;
-    gap:6px;
-}
+        .date-badge {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 8px 16px;
+            font-size: 13px;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-/* ── Stat Cards ────────────────────────────────────── */
-.stat-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-    margin-bottom:28px;
-}
+        /* ── Stat Cards ────────────────────────────────────── */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
 
-.stat-card{
-    background:#fff;
-    border-radius:16px;
-    padding:22px 20px;
-    box-shadow:0 2px 12px rgba(0,0,0,.06);
-    position:relative;
-    overflow:hidden;
-    transition:.3s;
-}
+        .stat-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 22px 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+            position: relative;
+            overflow: hidden;
+            transition: .3s;
+        }
 
-.stat-card::after{
-    content:'';
-    position:absolute;
-    top:0;
-    right:0;
-    width:80px;
-    height:80px;
-    border-radius:0 16px 0 80px;
-    opacity:.06;
-}
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, .1);
+        }
 
-.stat-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 8px 28px rgba(0,0,0,.1);
-}
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 14px;
+        }
 
-.stat-icon{
-    width:50px;
-    height:50px;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    color:#fff;
-    margin-bottom:14px;
-}
+        .stat-icon.products {
+            background: linear-gradient(135deg, #EB7405, #DC410A);
+        }
 
-.stat-icon.products { background:linear-gradient(135deg,#EB7405,#DC410A); }
-.stat-icon.orders   { background:linear-gradient(135deg,#6366f1,#4f46e5); }
-.stat-icon.customers{ background:linear-gradient(135deg,#10b981,#059669); }
-.stat-icon.revenue  { background:linear-gradient(135deg,#f59e0b,#d97706); }
+        .stat-icon.orders {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+        }
 
-.stat-card h6{
-    font-size:12px;
-    font-weight:600;
-    text-transform:uppercase;
-    letter-spacing:.6px;
-    color:#94a3b8;
-    margin:0 0 6px;
-}
+        .stat-icon.customers {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
 
-.stat-card h3{
-    font-size:28px;
-    font-weight:700;
-    color:#1e0536;
-    margin:0 0 10px;
-}
+        .stat-icon.revenue {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
 
-.stat-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    font-size:12px;
-    font-weight:600;
-    padding:3px 9px;
-    border-radius:20px;
-}
+        .stat-card h6 {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            color: #94a3b8;
+            margin: 0 0 6px;
+        }
 
-.stat-badge.up{
-    background:#dcfce7;
-    color:#16a34a;
-}
+        .stat-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e0536;
+            margin: 0 0 10px;
+        }
 
-.stat-badge.down{
-    background:#fee2e2;
-    color:#dc2626;
-}
+        .stat-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
 
-/* ── Section Title ─────────────────────────────────── */
-.section-title{
-    font-size:17px;
-    font-weight:700;
-    color:#1e0536;
-    margin:0 0 16px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
+        .stat-badge.up {
+            background: #dcfce7;
+            color: #16a34a;
+        }
 
-.section-title::before{
-    content:'';
-    width:4px;
-    height:20px;
-    background:linear-gradient(180deg,#EB7405,#DC410A);
-    border-radius:4px;
-    display:inline-block;
-}
+        .stat-badge.down {
+            background: #fee2e2;
+            color: #dc2626;
+        }
 
-/* ── Category Cards ────────────────────────────────── */
-.category-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-    margin-bottom:28px;
-}
+        /* ── Section Title ─────────────────────────────────── */
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1e0536;
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.cat-card{
-    background:#fff;
-    border-radius:16px;
-    padding:20px;
-    box-shadow:0 2px 12px rgba(0,0,0,.06);
-    border-left:4px solid transparent;
-    transition:.3s;
-    cursor:pointer;
-}
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, #EB7405, #DC410A);
+            border-radius: 4px;
+            display: inline-block;
+        }
 
-.cat-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 24px rgba(0,0,0,.09);
-}
+        /* ── Category Cards ────────────────────────────────── */
+        /* nth-child colours removed — applied as inline styles in the loop */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
 
-.cat-card:nth-child(1){ border-left-color:#EB7405; }
-.cat-card:nth-child(2){ border-left-color:#6366f1; }
-.cat-card:nth-child(3){ border-left-color:#10b981; }
-.cat-card:nth-child(4){ border-left-color:#f59e0b; }
-.cat-card:nth-child(5){ border-left-color:#DC410A; }
+        .cat-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+            border-left: 4px solid transparent;
+            transition: .3s;
+            cursor: pointer;
+        }
 
-.cat-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:12px;
-}
+        .cat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .09);
+        }
 
-.cat-icon{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    color:#fff;
-}
+        .cat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
 
-.cat-card:nth-child(1) .cat-icon{ background:linear-gradient(135deg,#EB7405,#DC410A); }
-.cat-card:nth-child(2) .cat-icon{ background:linear-gradient(135deg,#6366f1,#4f46e5); }
-.cat-card:nth-child(3) .cat-icon{ background:linear-gradient(135deg,#10b981,#059669); }
-.cat-card:nth-child(4) .cat-icon{ background:linear-gradient(135deg,#f59e0b,#d97706); }
-.cat-card:nth-child(5) .cat-icon{ background:linear-gradient(135deg,#ef4444,#DC410A); }
+        .cat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #fff;
+        }
 
-.cat-count{
-    font-size:12px;
-    font-weight:600;
-    padding:4px 10px;
-    border-radius:20px;
-    background:#f1f5f9;
-    color:#64748b;
-}
+        .cat-count {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #f1f5f9;
+            color: #64748b;
+        }
 
-.cat-card h5{
-    font-size:15px;
-    font-weight:700;
-    color:#1e0536;
-    margin:0 0 8px;
-}
+        .cat-card h5 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e0536;
+            margin: 0 0 8px;
+        }
 
-.cat-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-}
+        .cat-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
 
-.cat-tag{
-    font-size:11px;
-    padding:3px 10px;
-    border-radius:20px;
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    color:#64748b;
-    font-weight:500;
-}
+        .cat-tag {
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            font-weight: 500;
+        }
 
-/* ── Fittings Section ──────────────────────────────── */
-.fit-section{
-    background:#fff;
-    border-radius:16px;
-    padding:24px;
-    box-shadow:0 2px 12px rgba(0,0,0,.06);
-    margin-bottom:28px;
-}
+        /* ── Fittings ──────────────────────────────────────── */
+        .fit-section {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+            margin-bottom: 28px;
+        }
 
-.fit-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:14px;
-    margin-top:16px;
-}
+        .fit-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
 
-.fit-card{
-    background:#f8fafc;
-    border-radius:14px;
-    padding:20px 14px;
-    text-align:center;
-    border:1.5px solid #e2e8f0;
-    transition:.3s;
-    cursor:pointer;
-}
+        .fit-card {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 20px 14px;
+            text-align: center;
+            border: 1.5px solid #e2e8f0;
+            transition: .3s;
+            cursor: pointer;
+        }
 
-.fit-card:hover{
-    background:linear-gradient(135deg,#220142,#16002d);
-    border-color:transparent;
-    transform:translateY(-3px);
-    box-shadow:0 8px 20px rgba(34,1,66,.25);
-}
+        .fit-card:hover {
+            background: linear-gradient(135deg, #220142, #16002d);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(34, 1, 66, .25);
+        }
 
-.fit-card:hover .fit-icon,
-.fit-card:hover .fit-label{
-    color:#fff;
-}
+        .fit-card:hover .fit-icon,
+        .fit-card:hover .fit-label {
+            color: #fff;
+        }
 
-.fit-card:hover .fit-sub{
-    color:rgba(255,255,255,.6);
-}
+        .fit-card:hover .fit-sub {
+            color: rgba(255, 255, 255, .6);
+        }
 
-.fit-icon{
-    font-size:28px;
-    color:#220142;
-    margin-bottom:10px;
-    transition:.3s;
-}
+        .fit-icon {
+            font-size: 28px;
+            color: #220142;
+            margin-bottom: 10px;
+            transition: .3s;
+        }
 
-.fit-label{
-    font-size:13px;
-    font-weight:700;
-    color:#1e0536;
-    margin-bottom:4px;
-    transition:.3s;
-}
+        .fit-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e0536;
+            margin-bottom: 4px;
+            transition: .3s;
+        }
 
-.fit-sub{
-    font-size:11px;
-    color:#94a3b8;
-    transition:.3s;
-}
+        .fit-sub {
+            font-size: 11px;
+            color: #94a3b8;
+            transition: .3s;
+        }
 
-/* ── Bottom Grid ───────────────────────────────────── */
-.bottom-grid{
-    display:grid;
-    grid-template-columns:1.4fr 1fr;
-    gap:18px;
-    margin-bottom:28px;
-}
+        /* ── Bottom Grid ───────────────────────────────────── */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
 
-/* ── Recent Orders ─────────────────────────────────── */
-.panel{
-    background:#fff;
-    border-radius:16px;
-    padding:22px;
-    box-shadow:0 2px 12px rgba(0,0,0,.06);
-}
+        /* ── Panel ─────────────────────────────────────────── */
+        .panel {
+            background: #fff;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+        }
 
-.panel-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:18px;
-}
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
 
-.panel-title{
-    font-size:15px;
-    font-weight:700;
-    color:#1e0536;
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
+        .panel-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e0536;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.view-all{
-    font-size:13px;
-    color:#EB7405;
-    text-decoration:none;
-    font-weight:600;
-}
+        .view-all {
+            font-size: 13px;
+            color: #EB7405;
+            text-decoration: none;
+            font-weight: 600;
+        }
 
-.order-table{
-    width:100%;
-    border-collapse:collapse;
-}
+        /* ── Order Table ───────────────────────────────────── */
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-.order-table th{
-    font-size:11px;
-    font-weight:600;
-    text-transform:uppercase;
-    letter-spacing:.5px;
-    color:#94a3b8;
-    padding:8px 0;
-    text-align:left;
-    border-bottom:1px solid #f1f5f9;
-}
+        .order-table th {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: #94a3b8;
+            padding: 8px 0;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
 
-.order-table td{
-    padding:12px 0;
-    border-bottom:1px solid #f8fafc;
-    font-size:13px;
-    color:#374151;
-}
+        .order-table td {
+            padding: 12px 0;
+            border-bottom: 1px solid #f8fafc;
+            font-size: 13px;
+            color: #374151;
+        }
 
-.order-table tr:last-child td{
-    border-bottom:none;
-}
+        .order-table tr:last-child td {
+            border-bottom: none;
+        }
 
-.order-id{
-    font-weight:600;
-    color:#1e0536;
-}
+        .order-id {
+            font-weight: 600;
+            color: #1e0536;
+        }
 
-.status-pill{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    font-size:11px;
-    font-weight:600;
-    padding:3px 10px;
-    border-radius:20px;
-}
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
 
-.status-pill.delivered { background:#dcfce7; color:#16a34a; }
-.status-pill.pending   { background:#fef9c3; color:#ca8a04; }
-.status-pill.processing{ background:#dbeafe; color:#2563eb; }
+        .status-pill.delivered {
+            background: #dcfce7;
+            color: #16a34a;
+        }
 
-/* ── Quick Info ────────────────────────────────────── */
-.info-list{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
+        .status-pill.pending {
+            background: #fef9c3;
+            color: #ca8a04;
+        }
 
-.info-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:14px;
-    border-radius:12px;
-    background:#f8fafc;
-    border:1px solid #f1f5f9;
-    transition:.3s;
-}
+        .status-pill.processing {
+            background: #dbeafe;
+            color: #2563eb;
+        }
 
-.info-item:hover{
-    background:#f1f5f9;
-}
+        .status-pill.trial {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
 
-.info-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
+        .status-pill.ready {
+            background: #cffafe;
+            color: #0e7490;
+        }
 
-.info-dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    flex-shrink:0;
-}
+        .status-pill.cancelled {
+            background: #fee2e2;
+            color: #dc2626;
+        }
 
-.info-label{
-    font-size:13px;
-    font-weight:600;
-    color:#374151;
-}
+        /* ── Quick Overview ────────────────────────────────── */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
-.info-value{
-    font-size:13px;
-    font-weight:700;
-    color:#1e0536;
-}
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            transition: .3s;
+        }
 
-/* ── Responsive ────────────────────────────────────── */
-@media(max-width:1200px){
-    .stat-grid      { grid-template-columns:repeat(2,1fr); }
-    .category-grid  { grid-template-columns:repeat(2,1fr); }
-    .fit-grid       { grid-template-columns:repeat(3,1fr); }
-    .bottom-grid    { grid-template-columns:1fr; }
-}
+        .info-item:hover {
+            background: #f1f5f9;
+        }
 
-@media(max-width:768px){
-    .stat-grid      { grid-template-columns:1fr; }
-    .category-grid  { grid-template-columns:1fr; }
-    .fit-grid       { grid-template-columns:repeat(2,1fr); }
-    .top-bar        { flex-direction:column; align-items:flex-start; }
-}
-</style>
+        .info-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .info-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .info-value {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e0536;
+        }
+
+        /* ── Empty States ──────────────────────────────────── */
+        .empty-state {
+            text-align: center;
+            padding: 36px 20px;
+            color: #94a3b8;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* ── Responsive ────────────────────────────────────── */
+        @media (max-width: 1200px) {
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .fit-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fit-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 @endpush
 
 @section('content')
-<div class="dash-wrap">
 
-    {{-- ── Top Bar ── --}}
-    <div class="top-bar">
-        <div class="top-bar-left">
-            <h2>Dashboard</h2>
-            <p>Welcome back, <strong>{{ Auth::guard('admin')->user()->name }}</strong> — here's what's happening today.</p>
-        </div>
-        <div class="top-bar-right">
-            <div class="date-badge">
-                <i class='bx bx-calendar'></i>
-                {{ now()->format('D, d M Y') }}
+    @php
+        /* ─── Color palette for category cards (cycles if more than 5 categories) ─── */
+        $catPalette = [
+            ['border' => '#EB7405', 'gradient' => 'linear-gradient(135deg,#EB7405,#DC410A)'],
+            ['border' => '#6366f1', 'gradient' => 'linear-gradient(135deg,#6366f1,#4f46e5)'],
+            ['border' => '#10b981', 'gradient' => 'linear-gradient(135deg,#10b981,#059669)'],
+            ['border' => '#f59e0b', 'gradient' => 'linear-gradient(135deg,#f59e0b,#d97706)'],
+            ['border' => '#DC410A', 'gradient' => 'linear-gradient(135deg,#ef4444,#DC410A)'],
+        ];
+
+        /* ─── Fallback Boxicons per position ─── */
+        $catIconDefaults = ['bx-layer', 'bx-trip', 'bx-briefcase', 'bx-sun', 'bx-badge-check'];
+
+        /* ─── Fitting icon map: keyword in Fitting.name → icon + sub-label ─── */
+        $fitIconMap = [
+            'narrow' => ['icon' => 'bx-move-horizontal', 'sub' => 'Slim & Tapered'],
+            'comfort' => ['icon' => 'bx-expand-horizontal', 'sub' => 'Relaxed Waist'],
+            'relax' => ['icon' => 'bx-fullscreen', 'sub' => 'Loose & Easy'],
+            'straight' => ['icon' => 'bx-minus', 'sub' => 'Classic Cut'],
+            'boot' => ['icon' => 'bx-git-branch', 'sub' => 'Flare at Hem'],
+            'slim' => ['icon' => 'bx-move-horizontal', 'sub' => 'Tapered Leg'],
+            'loose' => ['icon' => 'bx-fullscreen', 'sub' => 'Easy Wear'],
+            'regular' => ['icon' => 'bx-minus', 'sub' => 'Classic Cut'],
+            'wide' => ['icon' => 'bx-expand-horizontal', 'sub' => 'Wide Leg'],
+        ];
+
+        /* ─── Order status → pill class, icon, label ─── */
+        $statusConfig = [
+            'pending' => ['class' => 'pending', 'icon' => '⧗', 'label' => 'Pending'],
+            'processing' => ['class' => 'processing', 'icon' => '⟳', 'label' => 'Processing'],
+            'in_progress' => ['class' => 'processing', 'icon' => '⟳', 'label' => 'In Progress'],
+            'measurement_taken' => ['class' => 'processing', 'icon' => '⟳', 'label' => 'Measured'],
+            'trial' => ['class' => 'trial', 'icon' => '◎', 'label' => 'Trial'],
+            'trial_scheduled' => ['class' => 'trial', 'icon' => '◎', 'label' => 'Trial Set'],
+            'ready' => ['class' => 'ready', 'icon' => '●', 'label' => 'Ready'],
+            'delivered' => ['class' => 'delivered', 'icon' => '✓', 'label' => 'Delivered'],
+            'completed' => ['class' => 'delivered', 'icon' => '✓', 'label' => 'Completed'],
+            'cancelled' => ['class' => 'cancelled', 'icon' => '✕', 'label' => 'Cancelled'],
+        ];
+
+        /* ─── Indian rupee formatter ─── */
+        $fmtInr = function (float $amt): string {
+            if ($amt >= 10000000) {
+                return '₹' . round($amt / 10000000, 1) . ' Cr';
+            }
+            if ($amt >= 100000) {
+                return '₹' . round($amt / 100000, 1) . ' L';
+            }
+            return '₹' . number_format((int) $amt, 0);
+        };
+    @endphp
+
+    <div class="dash-wrap">
+
+        {{-- ── Top Bar ───────────────────────────────────────── --}}
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <h2>Dashboard</h2>
+                <p>Welcome back, <strong>{{ Auth::guard('admin')->user()->name }}</strong> — here's what's happening today.
+                </p>
+            </div>
+            <div class="top-bar-right">
+                <div class="date-badge">
+                    <i class='bx bx-calendar'></i>
+                    {{ now()->format('D, d M Y') }}
+                </div>
             </div>
         </div>
+
+        {{-- ── Stat Cards ─────────────────────────────────────── --}}
+        <div class="stat-grid">
+
+            {{-- Products --}}
+            <div class="stat-card">
+                <div class="stat-icon products"><i class='bx bx-package'></i></div>
+                <h6>Total Products</h6>
+                <h3>{{ number_format($totalProducts) }}</h3>
+                @if ($productGrowth >= 0)
+                    <span class="stat-badge up">
+                        <i class='bx bx-trending-up'></i> +{{ $productGrowth }}% this month
+                    </span>
+                @else
+                    <span class="stat-badge down">
+                        <i class='bx bx-trending-down'></i> {{ $productGrowth }}% this month
+                    </span>
+                @endif
+            </div>
+
+            {{-- Orders --}}
+            <div class="stat-card">
+                <div class="stat-icon orders"><i class='bx bx-cart-alt'></i></div>
+                <h6>Total Orders</h6>
+                <h3>{{ number_format($totalOrders) }}</h3>
+                @if ($orderGrowth >= 0)
+                    <span class="stat-badge up">
+                        <i class='bx bx-trending-up'></i> +{{ $orderGrowth }}% this week
+                    </span>
+                @else
+                    <span class="stat-badge down">
+                        <i class='bx bx-trending-down'></i> {{ $orderGrowth }}% this week
+                    </span>
+                @endif
+            </div>
+
+            {{-- Customers --}}
+            <div class="stat-card">
+                <div class="stat-icon customers"><i class='bx bx-group'></i></div>
+                <h6>Customers</h6>
+                <h3>{{ number_format($totalCustomers) }}</h3>
+                @if ($newCustomersToday > 0)
+                    <span class="stat-badge up">
+                        <i class='bx bx-trending-up'></i> +{{ $newCustomersToday }} new today
+                    </span>
+                @else
+                    <span class="stat-badge up">
+                        <i class='bx bx-user-check'></i> {{ number_format($totalCustomers) }} total
+                    </span>
+                @endif
+            </div>
+
+            {{-- Revenue --}}
+            <div class="stat-card">
+                <div class="stat-icon revenue"><i class='bx bx-rupee'></i></div>
+                <h6>Revenue</h6>
+                <h3>{{ $fmtInr($totalRevenue) }}</h3>
+                @if ($revenueGrowth >= 0)
+                    <span class="stat-badge up">
+                        <i class='bx bx-trending-up'></i> +{{ $revenueGrowth }}% vs last month
+                    </span>
+                @else
+                    <span class="stat-badge down">
+                        <i class='bx bx-trending-down'></i> {{ $revenueGrowth }}% vs last month
+                    </span>
+                @endif
+            </div>
+
+        </div>
+
+        {{-- ── Pant Categories ─────────────────────────────────── --}}
+        <h4 class="section-title">Pant Categories</h4>
+
+        <div class="category-grid">
+            @forelse($categories as $cat)
+                @php
+                    $ci = $loop->index % count($catPalette);
+                    $colors = $catPalette[$ci];
+                    $icon = $catIconDefaults[$ci] ?? 'bx-category';
+                    // subcategories() is the correct method name from your Category model
+                    $subCnt = $cat->subcategories->count();
+                @endphp
+                <div class="cat-card" style="border-left-color: {{ $colors['border'] }};<div class="cat-card"
+                    style="border-left-color: {{ $colors['border'] }}; cursor:pointer;"
+                    onclick="window.location.href='{{ route('category.list', $cat->slug) }}'">
+                    <div class="cat-header">
+                        <div class="cat-icon" style="background: {{ $colors['gradient'] }};">
+                            <i class='bx {{ $icon }}'></i>
+                        </div>
+                        <span class="cat-count">
+                            {{ $subCnt }} {{ $subCnt === 1 ? 'Type' : 'Types' }}
+                        </span>
+                    </div>
+                    <h5>{{ $cat->name }}</h5>
+                    <div class="cat-tags">
+                        @forelse($cat->subcategories as $sub)
+                            <span class="cat-tag">{{ $sub->name }}</span>
+                        @empty
+                            <span class="cat-tag" style="color:#b0bec5;font-style:italic;">No sub-types</span>
+                        @endforelse
+                    </div>
+                </div>
+            @empty
+                <div class="empty-state">
+                    <i class='bx bx-category'></i>
+                    <p>No categories found.</p>
+                </div>
+            @endforelse
+        </div>
+
+        {{-- ── Fittings ─────────────────────────────────────────── --}}
+        <div class="fit-section">
+            <h4 class="section-title">Fittings Available</h4>
+            <div class="fit-grid">
+                @forelse($fittings as $fit)
+                    @php
+                        $fitKey = null;
+                        $fitName = strtolower($fit->name);
+
+                        foreach ($fitIconMap as $kw => $cfg) {
+                            if (str_contains($fitName, $kw)) {
+                                $fitKey = $kw;
+                                break;
+                            }
+                        }
+
+                        $fitIcon = $fitKey ? $fitIconMap[$fitKey]['icon'] : 'bx-move';
+                        $fitSub = $fitKey ? $fitIconMap[$fitKey]['sub'] : 'Custom Fit';
+                    @endphp
+
+                    <div class="fit-card" onclick="window.location.href='{{ route('fitting.coustomer.list', $fit->id) }}'"
+                        style="cursor:pointer;">
+                        <div class="fit-icon"><i class='bx {{ $fitIcon }}'></i></div>
+                        <div class="fit-label">{{ $fit->name }}</div>
+                        <div class="fit-sub">{{ $fitSub }}</div>
+                    </div>
+                @empty
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class='bx bx-ruler'></i>
+                        <p>No fittings configured yet.</p>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+
+        {{-- ── Bottom: Recent Orders + Quick Overview ─────────────── --}}
+        <div class="bottom-grid">
+
+            {{-- Recent Fitting Orders --}}
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class='bx bx-receipt' style="color:#EB7405;font-size:20px;"></i>
+                        Recent Orders
+                    </div>
+                    <a href="{{ route('coustomer.order') }}" class="view-all">View All →</a>
+                </div>
+
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Product</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($recentOrders as $order)
+                            @php
+                                $statusKey = strtolower($order->status ?? 'pending');
+                                $sc = $statusConfig[$statusKey] ?? [
+                                    'class' => 'pending',
+                                    'icon' => '•',
+                                    'label' => ucwords(str_replace('_', ' ', $statusKey)),
+                                ];
+
+                                // Use custom order_id field; fall back to zero-padded primary key
+                                $displayId = $order->order_id
+                                    ? $order->order_id
+                                    : '#' . str_pad($order->id, 3, '0', STR_PAD_LEFT);
+                            @endphp
+                            <tr>
+                                <td><span class="order-id">{{ $displayId }}</span></td>
+                                <td>{{ $order->customer_name ?: '—' }}</td>
+                                <td>{{ Str::limit($order->product_name ?? '—', 20) }}</td>
+                                <td>₹{{ number_format((float) $order->total_amount, 0) }}</td>
+                                <td>
+                                    <span class="status-pill {{ $sc['class'] }}">
+                                        {{ $sc['icon'] }} {{ $sc['label'] }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" style="text-align:center;padding:32px;color:#94a3b8;font-size:13px;">
+                                    <i class='bx bx-package' style="font-size:32px;display:block;margin-bottom:8px;"></i>
+                                    No orders yet.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            {{-- Quick Overview --}}
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class='bx bx-bar-chart-alt-2' style="color:#EB7405;font-size:20px;"></i>
+                        Quick Overview
+                    </div>
+                </div>
+
+                <div class="info-list">
+
+                    <div class="info-item">
+                        <div class="info-left">
+                            <div class="info-dot" style="background:#EB7405;"></div>
+                            <span class="info-label">Top Category (by Products)</span>
+                        </div>
+                        <span class="info-value">{{ $bestSellingCategory }}</span>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-left">
+                            <div class="info-dot" style="background:#6366f1;"></div>
+                            <span class="info-label">Most Popular Style</span>
+                        </div>
+                        <span class="info-value">{{ $mostPopularStyle }}</span>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-left">
+                            <div class="info-dot" style="background:#10b981;"></div>
+                            <span class="info-label">Orders This Week</span>
+                        </div>
+                        <span class="info-value">{{ $thisWeekOrders }}</span>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-left">
+                            <div class="info-dot" style="background:#f59e0b;"></div>
+                            <span class="info-label">Pending Deliveries</span>
+                        </div>
+                        <span class="info-value">{{ $pendingDeliveries }}</span>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-left">
+                            <div class="info-dot" style="background:#DC410A;"></div>
+                            <span class="info-label">Low Stock Alerts</span>
+                        </div>
+                        <span class="info-value" @if ($lowStockCount > 0) style="color:#DC410A;" @endif>
+                            @if ($lowStockCount > 0)
+                                {{ $lowStockCount }} {{ Str::plural('Item', $lowStockCount) }}
+                            @else
+                                <span style="color:#16a34a;">All Good ✓</span>
+                            @endif
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-left">
+                            <div class="info-dot" style="background:#16a34a;"></div>
+                            <span class="info-label">New Customers (Month)</span>
+                        </div>
+                        <span class="info-value">{{ $newCustomersMonth }}</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
     </div>
-
-    {{-- ── Stat Cards ── --}}
-    <div class="stat-grid">
-
-        <div class="stat-card">
-            <div class="stat-icon products">
-                <i class='bx bx-package'></i>
-            </div>
-            <h6>Total Products</h6>
-            <h3>150</h3>
-            <span class="stat-badge up"><i class='bx bx-trending-up'></i> +12% this month</span>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon orders">
-                <i class='bx bx-cart-alt'></i>
-            </div>
-            <h6>Total Orders</h6>
-            <h3>85</h3>
-            <span class="stat-badge up"><i class='bx bx-trending-up'></i> +8% this week</span>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon customers">
-                <i class='bx bx-group'></i>
-            </div>
-            <h6>Customers</h6>
-            <h3>230</h3>
-            <span class="stat-badge up"><i class='bx bx-trending-up'></i> +5 new today</span>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon revenue">
-                <i class='bx bx-rupee'></i>
-            </div>
-            <h6>Revenue</h6>
-            <h3>₹45,000</h3>
-            <span class="stat-badge down"><i class='bx bx-trending-down'></i> -3% vs last month</span>
-        </div>
-
-    </div>
-
-    {{-- ── Pant Categories ── --}}
-    <h4 class="section-title">Pant Categories</h4>
-
-    <div class="category-grid">
-
-        <div class="cat-card">
-            <div class="cat-header">
-                <div class="cat-icon"><i class='bx bx-layer'></i></div>
-                <span class="cat-count">3 Types</span>
-            </div>
-            <h5>Cotton Pants</h5>
-            <div class="cat-tags">
-                <span class="cat-tag">Chinos</span>
-                <span class="cat-tag">Linen</span>
-                <span class="cat-tag">Twills</span>
-            </div>
-        </div>
-
-        <div class="cat-card">
-            <div class="cat-header">
-                <div class="cat-icon"><i class='bx bx-trip'></i></div>
-                <span class="cat-count">1 Type</span>
-            </div>
-            <h5>Travel Series Pants</h5>
-            <div class="cat-tags">
-                <span class="cat-tag">Lightweight</span>
-                <span class="cat-tag">Wrinkle-Free</span>
-            </div>
-        </div>
-
-        <div class="cat-card">
-            <div class="cat-header">
-                <div class="cat-icon"><i class='bx bx-briefcase'></i></div>
-                <span class="cat-count">2 Occasions</span>
-            </div>
-            <h5>Formal Pants</h5>
-            <div class="cat-tags">
-                <span class="cat-tag">Office Wear</span>
-                <span class="cat-tag">Party Wear</span>
-            </div>
-        </div>
-
-        <div class="cat-card">
-            <div class="cat-header">
-                <div class="cat-icon"><i class='bx bx-sun'></i></div>
-                <span class="cat-count">2 Types</span>
-            </div>
-            <h5>Shorts / Nickers</h5>
-            <div class="cat-tags">
-                <span class="cat-tag">Linen</span>
-                <span class="cat-tag">Twills</span>
-            </div>
-        </div>
-
-        <div class="cat-card">
-            <div class="cat-header">
-                <div class="cat-icon"><i class='bx bx-badge-check'></i></div>
-                <span class="cat-count">1 Variant</span>
-            </div>
-            <h5>Denim</h5>
-            <div class="cat-tags">
-                <span class="cat-tag">Special Black</span>
-            </div>
-        </div>
-
-    </div>
-
-    {{-- ── Fittings ── --}}
-    <div class="fit-section">
-
-        <h4 class="section-title">Fittings Available</h4>
-
-        <div class="fit-grid">
-
-            <div class="fit-card">
-                <div class="fit-icon"><i class='bx bx-move-horizontal'></i></div>
-                <div class="fit-label">Narrow Fit</div>
-                <div class="fit-sub">Slim & Tapered</div>
-            </div>
-
-            <div class="fit-card">
-                <div class="fit-icon"><i class='bx bx-expand-horizontal'></i></div>
-                <div class="fit-label">Comfort Fit</div>
-                <div class="fit-sub">Relaxed Waist</div>
-            </div>
-
-            <div class="fit-card">
-                <div class="fit-icon"><i class='bx bx-fullscreen'></i></div>
-                <div class="fit-label">Relax Fit</div>
-                <div class="fit-sub">Loose & Easy</div>
-            </div>
-
-            <div class="fit-card">
-                <div class="fit-icon"><i class='bx bx-minus'></i></div>
-                <div class="fit-label">Straight Fit</div>
-                <div class="fit-sub">Classic Cut</div>
-            </div>
-
-            <div class="fit-card">
-                <div class="fit-icon"><i class='bx bx-git-branch'></i></div>
-                <div class="fit-label">Boot Cut</div>
-                <div class="fit-sub">Flare at Hem</div>
-            </div>
-
-        </div>
-
-    </div>
-
-    {{-- ── Bottom: Orders + Quick Stats ── --}}
-    <div class="bottom-grid">
-
-        {{-- Recent Orders --}}
-        <div class="panel">
-            <div class="panel-header">
-                <div class="panel-title">
-                    <i class='bx bx-receipt' style="color:#EB7405;font-size:20px;"></i>
-                    Recent Orders
-                </div>
-                <a href="#" class="view-all">View All →</a>
-            </div>
-
-            <table class="order-table">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Category</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="order-id">#ORD-001</span></td>
-                        <td>Ravi Kumar</td>
-                        <td>Formal Pants</td>
-                        <td>₹1,200</td>
-                        <td><span class="status-pill delivered">✓ Delivered</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="order-id">#ORD-002</span></td>
-                        <td>Suresh Mehta</td>
-                        <td>Cotton Pants</td>
-                        <td>₹850</td>
-                        <td><span class="status-pill processing">⟳ Processing</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="order-id">#ORD-003</span></td>
-                        <td>Anjali Sharma</td>
-                        <td>Denim</td>
-                        <td>₹1,600</td>
-                        <td><span class="status-pill pending">⧗ Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="order-id">#ORD-004</span></td>
-                        <td>Mohan Patel</td>
-                        <td>Travel Series</td>
-                        <td>₹2,100</td>
-                        <td><span class="status-pill delivered">✓ Delivered</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="order-id">#ORD-005</span></td>
-                        <td>Priya Singh</td>
-                        <td>Shorts</td>
-                        <td>₹650</td>
-                        <td><span class="status-pill processing">⟳ Processing</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        {{-- Quick Info --}}
-        <div class="panel">
-            <div class="panel-header">
-                <div class="panel-title">
-                    <i class='bx bx-bar-chart-alt-2' style="color:#EB7405;font-size:20px;"></i>
-                    Quick Overview
-                </div>
-            </div>
-
-            <div class="info-list">
-
-                <div class="info-item">
-                    <div class="info-left">
-                        <div class="info-dot" style="background:#EB7405;"></div>
-                        <span class="info-label">Best-Selling Category</span>
-                    </div>
-                    <span class="info-value">Formal Pants</span>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-left">
-                        <div class="info-dot" style="background:#6366f1;"></div>
-                        <span class="info-label">Most Popular Fit</span>
-                    </div>
-                    <span class="info-value">Comfort Fit</span>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-left">
-                        <div class="info-dot" style="background:#10b981;"></div>
-                        <span class="info-label">Orders This Week</span>
-                    </div>
-                    <span class="info-value">24</span>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-left">
-                        <div class="info-dot" style="background:#f59e0b;"></div>
-                        <span class="info-label">Pending Deliveries</span>
-                    </div>
-                    <span class="info-value">7</span>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-left">
-                        <div class="info-dot" style="background:#DC410A;"></div>
-                        <span class="info-label">Low Stock Alerts</span>
-                    </div>
-                    <span class="info-value" style="color:#DC410A;">3 Items</span>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-left">
-                        <div class="info-dot" style="background:#16a34a;"></div>
-                        <span class="info-label">New Customers (Month)</span>
-                    </div>
-                    <span class="info-value">18</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
 @endsection

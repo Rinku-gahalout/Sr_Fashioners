@@ -1038,15 +1038,15 @@
                                     </a>
 
                                     {{-- Edit --}}
-                                    <a href="#" class="btn-action edit" title="Edit">
+                                    <a href="{{ route('edit.product', $product->id) }}" class="btn-action edit" title="Edit">
                                         <i class='bx bx-edit'></i>
                                     </a>
 
                                     {{-- Delete --}}
-                                    <button class="btn-action delete" title="Delete"
-                                        onclick="openDeleteModal('{{ $product->name }}', '#')">
-                                        <i class='bx bx-trash'></i>
-                                    </button>
+                                        <button class="btn-action delete" title="Delete"
+                                            onclick="openDeleteModal('{{ $product->name }}', '{{ route('delete.product', $product->id) }}')">
+                                            <i class='bx bx-trash'></i>
+                                        </button>
 
                                 </div>
                             </td>

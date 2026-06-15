@@ -17,9 +17,151 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function dashboard(){
-        return view('wl-admin.dashboard');
-    }
+public function dashboard()
+{
+    // ── 1. Stat Counts ──────────────────────────────────────────────────
+    $totalProducts     = Product::count();
+    $totalCustomers    = Customer::count();
+    $newCustomersToday = Customer::whereDate('created_at', today())->count();
+    $totalOrders       = FittingOrder::count() + BulkOrder::count();
+    $totalRevenue      = (float) FittingOrder::sum('total_amount')
+                       + (float) BulkOrder::sum('total_amount');
+
+    // ── 2. Period Helpers ────────────────────────────────────────────────
+    $curM = now()->month;             $curY = now()->year;
+    $prvM = now()->subMonth()->month; $prvY = now()->subMonth()->year;
+
+    // ── 3. Product Growth — month-over-month ─────────────────────────────
+    $cntCurProd = Product::whereMonth('created_at', $curM)->whereYear('created_at', $curY)->count();
+    $cntPrvProd = Product::whereMonth('created_at', $prvM)->whereYear('created_at', $prvY)->count();
+    $productGrowth = $cntPrvProd > 0
+        ? round((($cntCurProd - $cntPrvProd) / $cntPrvProd) * 100, 1)
+        : ($cntCurProd > 0 ? 100 : 0);
+
+    // ── 4. Order Growth — week-over-week ─────────────────────────────────
+    $swS = now()->startOfWeek();           $swE = now()->endOfWeek();
+    $lwS = now()->subWeek()->startOfWeek(); $lwE = now()->subWeek()->endOfWeek();
+
+    $thisWeekOrders = FittingOrder::whereBetween('created_at', [$swS, $swE])->count()
+                    + BulkOrder::whereBetween('created_at',    [$swS, $swE])->count();
+    $lastWeekOrders = FittingOrder::whereBetween('created_at', [$lwS, $lwE])->count()
+                    + BulkOrder::whereBetween('created_at',    [$lwS, $lwE])->count();
+    $orderGrowth = $lastWeekOrders > 0
+        ? round((($thisWeekOrders - $lastWeekOrders) / $lastWeekOrders) * 100, 1)
+        : ($thisWeekOrders > 0 ? 100 : 0);
+
+    // ── 5. Revenue Growth — month-over-month ─────────────────────────────
+    $curRevenue = (float) FittingOrder::whereMonth('created_at', $curM)->whereYear('created_at', $curY)->sum('total_amount')
+               + (float) BulkOrder::whereMonth('created_at',    $curM)->whereYear('created_at', $curY)->sum('total_amount');
+    $prvRevenue = (float) FittingOrder::whereMonth('created_at', $prvM)->whereYear('created_at', $prvY)->sum('total_amount')
+               + (float) BulkOrder::whereMonth('created_at',    $prvM)->whereYear('created_at', $prvY)->sum('total_amount');
+    $revenueGrowth = $prvRevenue > 0
+        ? round((($curRevenue - $prvRevenue) / $prvRevenue) * 100, 1)
+        : ($curRevenue > 0 ? 100 : 0);
+
+    // ── 6. Categories with subcategories ─────────────────────────────────
+    // Category model has no products() relation, so product count via raw subquery
+    $categories = Category::with('subcategories')
+        ->select([
+            'categories.*',
+            DB::raw('(SELECT COUNT(*) FROM products WHERE products.category_id = categories.id) AS products_count'),
+        ])
+        ->orderBy('sort_order')
+        ->get();
+
+    // ── 7. Fittings ───────────────────────────────────────────────────────
+    $fittings = Fitting::orderBy('sort_order')->get();
+
+    // ── 8. Recent Fitting Orders ──────────────────────────────────────────
+    // customer_name & product_name are stored directly — no eager load needed
+    $recentOrders = collect()
+    ->merge(
+        FittingOrder::select(
+            'id',
+            'order_id',
+            'customer_name',
+            'mobile',
+            'product_name',
+            'total_amount',
+            'status',
+            'created_at'
+        )->get()->map(function ($order) {
+            $order->order_type = 'Fitting';
+            return $order;
+        })
+    )
+    ->merge(
+        BulkOrder::select(
+            'id',
+            'order_id',
+            'customer_name',
+            'mobile',
+            'product_name',
+            'status',
+            'created_at'
+        )->get()->map(function ($order) {
+            $order->order_type = 'Bulk';
+
+            // BulkOrder doesn't have total_amount column
+            $order->total_amount =
+                ($order->quantity ?? 0) * ($order->unit_price ?? 0);
+
+            return $order;
+        })
+    )
+    ->sortByDesc('created_at')
+    ->take(5)
+    ->values();
+
+    // ── 9. Quick Overview ─────────────────────────────────────────────────
+
+    // Category with most products
+    $bestSellingCategory = DB::table('categories')
+        ->select('categories.name', DB::raw('COUNT(products.id) AS cnt'))
+        ->leftJoin('products', 'products.category_id', '=', 'categories.id')
+        ->groupBy('categories.id', 'categories.name')
+        ->orderByDesc('cnt')
+        ->value('categories.name') ?? '—';
+
+    // Most-used style field in fitting_orders (the "fitting type" stored as text)
+    $mostPopularStyle = DB::table('fitting_orders')
+        ->select('style', DB::raw('COUNT(*) AS cnt'))
+        ->whereNotNull('style')
+        ->where('style', '!=', '')
+        ->whereNull('deleted_at')
+        ->groupBy('style')
+        ->orderByDesc('cnt')
+        ->value('style')
+        // Fall back to first Fitting record name if no orders exist yet
+        ?? Fitting::orderBy('sort_order')->value('name')
+        ?? '—';
+
+    $pendingDeliveries = FittingOrder::where('status', 'pending')->count()
+                       + BulkOrder::where('status', 'pending')->count();
+
+    // Products where stock_quantity has hit or dropped below their threshold
+    $lowStockCount = Product::whereRaw('stock_quantity <= COALESCE(low_stock_threshold, 5)')->count();
+
+    $newCustomersMonth = Customer::whereMonth('created_at', $curM)
+                                 ->whereYear('created_at', $curY)
+                                 ->count();
+
+    return view('wl-admin.dashboard', compact(
+        'totalProducts',       'productGrowth',
+        'totalOrders',         'orderGrowth',
+        'totalCustomers',      'newCustomersToday',
+        'totalRevenue',        'revenueGrowth',
+        'categories',
+        'fittings',
+        'recentOrders',
+        'bestSellingCategory',
+        'mostPopularStyle',
+        'thisWeekOrders',
+        'pendingDeliveries',
+        'lowStockCount',
+        'newCustomersMonth'
+    ));
+}
 
     public function logout(Request $request)
     {
@@ -86,7 +228,6 @@ class DashboardController extends Controller
     public function storeproduct(Request $request){
         $request->validate([
             'category_id'         => 'required|exists:categories,id',
-            'subcategory_id'      => 'required|exists:sub_categories,id',
             'name'                => 'required|string|max:150',
             'sku'                 => 'required|string|unique:products,sku',
             'short_description'   => 'nullable|string|max:250',
@@ -170,6 +311,161 @@ class DashboardController extends Controller
                 ->withInput()
                 ->with('error', $e->getMessage());
         }
+    }
+
+    public function editproduct($id)
+    {
+        $product = Product::with(['category', 'subcategory'])
+                    ->findOrFail($id);
+
+        $categories = Category::all();
+        $subcategories = SubCategory::all();
+        return view('wl-admin.product.editproduct', compact(
+            'product',
+            'categories',
+            'subcategories'
+        ));
+    }
+
+    public function updateproduct(Request $request, $id)
+    {
+        $request->validate([
+            'category_id'         => 'required|exists:categories,id',
+            'name'                => 'required|string|max:150',
+            'sku'                 => 'required|string|unique:products,sku,' . $id,
+            'short_description'   => 'nullable|string|max:250',
+            'description'         => 'nullable|string',
+            'mrp'                 => 'required|numeric|min:0',
+            'selling_price'       => 'required|numeric|min:0',
+
+            'main_image'          => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'gallery_images.*'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            $product = Product::findOrFail($id);
+
+            // =====================
+            // MAIN IMAGE UPDATE
+            // =====================
+            $mainImagePath = $product->main_image;
+
+            if ($request->hasFile('main_image')) {
+
+                // delete old file
+                if ($product->main_image && file_exists(public_path($product->main_image))) {
+                    unlink(public_path($product->main_image));
+                }
+
+                $image = $request->file('main_image');
+                $fileName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+                $image->move(public_path('products/main'), $fileName);
+
+                $mainImagePath = 'products/main/' . $fileName;
+            }
+
+            // =====================
+            // UPDATE PRODUCT
+            // =====================
+            $product->update([
+                'category_id'         => $request->category_id,
+                'subcategory_id'      => $request->subcategory_id,
+                'name'                => $request->name,
+                'sku'                 => $request->sku,
+                'short_description'   => $request->short_description,
+                'description'         => $request->description,
+                'fabric'              => $request->fabric,
+                'season'              => $request->season,
+                'tags'                => $request->tags,
+
+                'mrp'                 => $request->mrp,
+                'discount_percent'    => $request->discount_percent ?? 0,
+                'selling_price'       => $request->selling_price,
+
+                'stock_quantity'      => $request->stock_quantity,
+                'low_stock_threshold' => $request->low_stock_threshold,
+
+                'sizes'               => $request->sizes,
+                'colors'              => $request->colors,
+
+                'main_image'          => $mainImagePath,
+                'status'              => $request->status,
+            ]);
+
+            // =====================
+            // GALLERY IMAGES (ADD NEW ONLY)
+            // =====================
+            if ($request->hasFile('gallery_images')) {
+
+                foreach ($request->file('gallery_images') as $index => $image) {
+
+                    $fileName = time() . '_' . $index . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+                    $image->move(public_path('products/gallery'), $fileName);
+
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_path' => 'products/gallery/' . $fileName,
+                        'sort_order' => $index + 1,
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->route('admin.product')
+                ->with('success', 'Product updated successfully.');
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return redirect()->back()
+                ->withInput()
+                ->with('error', $e->getMessage());
+        }
+    }
+
+    public function deleteproduct($id)
+    {
+        $product = Product::with('images')->findOrFail($id);
+
+        // Delete main image
+        if ($product->main_image && file_exists(public_path($product->main_image))) {
+            unlink(public_path($product->main_image));
+        }
+
+        // Delete gallery images
+        foreach ($product->images as $image) {
+            if ($image->image_path && file_exists(public_path($image->image_path))) {
+                unlink(public_path($image->image_path));
+            }
+        }
+
+        // Delete gallery records
+        $product->images()->delete();
+
+        // Delete product
+        $product->delete();
+
+        return redirect()->back()->with('success', 'Product deleted successfully.');
+    }
+
+    public function deleteGalleryImage($id)
+    {
+        $image = ProductImage::findOrFail($id);
+
+        if ($image->image_path && file_exists(public_path($image->image_path))) {
+            unlink(public_path($image->image_path));
+        }
+
+        $image->delete();
+
+        return back()->with('success', 'Gallery image deleted successfully.');
     }
 
     public function list_category($slug)

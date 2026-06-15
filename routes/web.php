@@ -5,9 +5,14 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserAccountController;
+use App\Http\Controllers\CartController;
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::middleware('adminguest')->group(function () {
     route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
@@ -38,6 +43,10 @@ Route::middleware(['adminauth'])->group(function () {
     route::get('/admin/products',[DashboardController::class,'product'])->name('admin.product');
     route::get('/admin/add/product',[DashboardController::class,'addproduct'])->name('add.product');
     route::post('/admin/store/product',[DashboardController::class,'storeproduct'])->name('store.product');
+    route::get('/admin/product/{id}/edit',[DashboardController::class,'editproduct'])->name('edit.product');
+    route::put('/admin/product/{id}/update',[DashboardController::class,'updateproduct'])->name('update.product');
+    Route::delete('/admin/product/{id}', [DashboardController::class, 'deleteproduct'])->name('delete.product');
+    Route::delete('/admin/product/gallery-image/{id}', [DashboardController::class, 'deleteGalleryImage'])->name('delete.gallery.image');
     // route::get('/admin/cotton-pants/list',[DashboardController::class,'filteredproductlist'])->name('filterd.product.list');
 
     // category wise list
@@ -58,3 +67,25 @@ Route::middleware(['adminauth'])->group(function () {
     Route::get('/admin/coustomer/list',[DashboardController::class,'coustomer_list'])->name('coustomer.list');
     Route::patch('/admin/customers/{customer}/status',[DashboardController::class, 'updateStatus'])->name('admin.customers.updateStatus');
 });
+
+Route::middleware('customer.guest')->group(function () {
+    Route::get('/sign-in',[UserAccountController::class,'sign_in'])->name('user.sign.in');
+    Route::post('/register', [UserAccountController::class, 'register'])->name('register');
+    Route::post('/login', [UserAccountController::class, 'login'])->name('login');
+});
+Route::middleware('customer.auth')->group(function () {
+    Route::get('/user/account',[UserAccountController::class,'profilepage'])->name('user.profile.page');
+    Route::get('/wishlist',[UserAccountController::class,'wishlist'])->name('user.wishlist');    
+    Route::post('/logout', [UserAccountController::class, 'logout'])->name('logout');
+});
+
+Route::get('/',[HomeController::class,'index'])->name('index');
+Route::get('/about-us',[PageController::class,'about_us'])->name('about.us');
+Route::get('/contact-us',[PageController::class,'contact_us'])->name('contact.us');
+Route::get('/privacy-policy',[PageController::class,'privacy_policy'])->name('privacy.policy');
+Route::get('/term-condition',[PageController::class,'term_condition'])->name('term.condition');
+Route::get('/b2b-refund-policy',[PageController::class,'refund_policy'])->name('refund.policy');
+
+Route::get('/cart/list',[CartController::class,'cart_list'])->name('cart.list');
+
+route::get('/{category}',[HomeController::class,'list'])->name('list');
