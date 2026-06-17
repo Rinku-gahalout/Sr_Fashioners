@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
+use App\Models\Wishlist;
 
 class HomeController extends Controller
 {
@@ -276,6 +277,14 @@ $product = Product::with([
             'yellow'    => ['hex' => '#d4c93a', 'label' => 'Yellow'],
         ];
 
+        $isWishlisted = false;
+
+if (auth()->check()) {
+    $isWishlisted = Wishlist::where('user_id', auth()->id())
+        ->where('product_id', $product->id)
+        ->exists();
+}
+
         return view('productdetail', compact(
             'product',
             'galleryImages',
@@ -284,7 +293,8 @@ $product = Product::with([
             'categoryModel',
             'relatedProducts',
             'recentlyViewed',
-            'colorMap'
+            'colorMap',
+            'isWishlisted'
         ));
     }
 }

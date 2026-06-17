@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserAccountController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\WishlistController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -75,7 +76,13 @@ Route::middleware('customer.guest')->group(function () {
 });
 Route::middleware('customer.auth')->group(function () {
     Route::get('/user/account',[UserAccountController::class,'profilepage'])->name('user.profile.page');
-    Route::get('/wishlist',[UserAccountController::class,'wishlist'])->name('user.wishlist');    
+    Route::get('/wishlist',[WishlistController::class,'wishlist'])->name('user.wishlist');
+    Route::post('/wishlist/store', [WishlistController::class, 'store'])->name('wishlist.store')->middleware('auth');
+    Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy')->middleware('auth');
+    Route::get('/cart/list',[CartController::class,'index'])->name('cart.list'); 
+    Route::post('/cart',[CartController::class, 'store'])   ->name('cart.store');
+    Route::patch('/cart/{cart}',[CartController::class, 'update'])  ->name('cart.update');
+    Route::delete('/cart/{cart}',[CartController::class, 'destroy']) ->name('cart.destroy');   
     Route::post('/logout', [UserAccountController::class, 'logout'])->name('logout');
 });
 
@@ -86,8 +93,5 @@ Route::get('/privacy-policy',[PageController::class,'privacy_policy'])->name('pr
 Route::get('/term-condition',[PageController::class,'term_condition'])->name('term.condition');
 Route::get('/b2b-refund-policy',[PageController::class,'refund_policy'])->name('refund.policy');
 
-Route::get('/cart/list',[CartController::class,'cart_list'])->name('cart.list');
-
 route::get('/{category}',[HomeController::class,'list'])->name('list');
-
 route::get('/{category}/{product_name}',[HomeController::class,'product_detail'])->name('product.detail');
