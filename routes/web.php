@@ -89,3 +89,5 @@ Route::get('/b2b-refund-policy',[PageController::class,'refund_policy'])->name('
 Route::get('/cart/list',[CartController::class,'cart_list'])->name('cart.list');
 
 route::get('/{category}',[HomeController::class,'list'])->name('list');
+
+route::get('/{category}/{product_name}',[HomeController::class,'product_detail'])->name('product.detail');

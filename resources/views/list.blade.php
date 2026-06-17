@@ -1383,7 +1383,10 @@
                 <div class="product-grid" id="productGrid">
 
                     @forelse ($products as $product)
-                        <a class="prod-card" href="#">
+                        <a class="prod-card" href="{{ route('product.detail', [
+    'category'     => $product->subCategory?->slug ?? $product->category?->slug ?? 'product',
+    'product_name' => $product->slug ?? \Str::slug($product->name)
+]) }}">
 
                             <div class="prod-img-wrap">
                                 @if ($product->main_image)

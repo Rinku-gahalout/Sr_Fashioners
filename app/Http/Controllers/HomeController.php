@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\SubCategory;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -137,7 +139,6 @@ class HomeController extends Controller
         if (!empty($categoryParam)) {
             $selectedCategory = Category::whereIn('slug', $categoryParam)->first();
         }    
-
         return view('list', compact(
             'products',
             'categorySlug',
@@ -145,6 +146,146 @@ class HomeController extends Controller
             'selectedCategory'
         ));
 
+    }
+
+    public function product_detail(string $category, string $product_name)
+    {
+        // Load product
+$product = Product::with([
+    'category',
+    'subcategory',
+    'images'
+])
+->get()
+->first(function ($item) use ($product_name) {
+
+    if (!empty($item->slug)) {
+        return $item->slug === $product_name;
+    }
+
+    return Str::slug($item->name) === $product_name;
+});
+
+    abort_if(!$product, 404);
+
+        // Resolve category / subcategory
+        $subCategory = SubCategory::where('slug', $category)->first();
+
+        $categoryModel = $subCategory
+            ? $subCategory->category
+            : Category::where('slug', $category)->firstOrFail();
+
+        // Discount %
+        $discountPercent = 0;
+
+        if (
+            !empty($product->mrp) &&
+            $product->mrp > $product->selling_price
+        ) {
+            $discountPercent = round(
+                (($product->mrp - $product->selling_price) / $product->mrp) * 100
+            );
+        }
+
+        // Gallery Images
+        $galleryImages = collect();
+
+        if ($product->main_image) {
+            $galleryImages->push($product->main_image);
+        }
+
+        foreach ($product->images as $image) {
+            if ($image->image_path !== $product->main_image) {
+                $galleryImages->push($image->image_path);
+            }
+        }
+
+        $galleryImages = $galleryImages->unique()->values();
+
+        // Related Products
+        $relatedQuery = Product::with([
+            'category',
+            'subcategory'
+        ])
+        ->where('id', '!=', $product->id);
+
+        if ($product->subcategory_id) {
+            $relatedQuery->where(
+                'subcategory_id',
+                $product->subcategory_id
+            );
+        } else {
+            $relatedQuery->where(
+                'category_id',
+                $product->category_id
+            );
+        }
+
+        $relatedProducts = $relatedQuery
+            ->latest()
+            ->take(4)
+            ->get();
+
+        // Recently Viewed
+        $viewed = session()->get('recently_viewed', []);
+
+        $viewed = array_values(array_unique(
+            array_merge([$product->id], $viewed)
+        ));
+
+        $viewed = array_slice($viewed, 0, 11);
+
+        session()->put('recently_viewed', $viewed);
+
+        $viewedOtherIds = array_slice(
+            array_filter($viewed, fn ($id) => $id != $product->id),
+            0,
+            4
+        );
+
+        $recentlyViewed = collect();
+
+        if (!empty($viewedOtherIds)) {
+            $recentlyViewed = Product::with([
+                'category',
+                'subcategory'
+            ])
+            ->whereIn('id', $viewedOtherIds)
+            ->get()
+            ->sortBy(fn ($item) => array_search(
+                $item->id,
+                $viewedOtherIds
+            ))
+            ->values();
+        }
+
+        // Color Swatches
+        $colorMap = [
+            'black'     => ['hex' => '#1a1a1a', 'label' => 'Black'],
+            'white'     => ['hex' => '#f0f0f0', 'label' => 'White'],
+            'navy'      => ['hex' => '#1e3a5f', 'label' => 'Navy'],
+            'grey'      => ['hex' => '#6b7280', 'label' => 'Grey'],
+            'khaki'     => ['hex' => '#c3a882', 'label' => 'Khaki'],
+            'olive'     => ['hex' => '#6b7c48', 'label' => 'Olive'],
+            'brown'     => ['hex' => '#8B6347', 'label' => 'Brown'],
+            'wine'      => ['hex' => '#722f37', 'label' => 'Wine'],
+            'beige'     => ['hex' => '#C9B99A', 'label' => 'Beige'],
+            'dark_blue' => ['hex' => '#1e2a6e', 'label' => 'Dark Blue'],
+            'red'       => ['hex' => '#c0392b', 'label' => 'Red'],
+            'green'     => ['hex' => '#4caf50', 'label' => 'Green'],
+            'yellow'    => ['hex' => '#d4c93a', 'label' => 'Yellow'],
+        ];
+
+        return view('productdetail', compact(
+            'product',
+            'galleryImages',
+            'discountPercent',
+            'subCategory',
+            'categoryModel',
+            'relatedProducts',
+            'recentlyViewed',
+            'colorMap'
+        ));
     }
 }
  

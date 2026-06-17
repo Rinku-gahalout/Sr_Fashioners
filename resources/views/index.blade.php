@@ -12,12 +12,13 @@
                 <div class="hero-overlay"></div>
 
                 <div class="hero-content">
-                    <h1>The Fall Collection</h1>
+                    <h2>Summer soothing clothing</h2>
                     <p>
-                        Fashion plays an important role in people's lives.
-                        The way people dress expresses individuality and personality.
+                        Get everyday wear trousers and pants that are lightweight, fashionable, and made from breathable
+                        materials. Our summer collection has comfortable trousers, so you feel easy, while you look elegant
+                        without trying too much.
                     </p>
-                    <a href="#" class="explore-btn">Explore</a>
+                    <a href="{{ route('list', ['category' => 'cotton']) }}" class="explore-btn">Explore</a>
                 </div>
             </div>
 
@@ -28,9 +29,11 @@
                 <div class="hero-overlay"></div>
 
                 <div class="hero-content">
-                    <h1>New Arrivals</h1>
-                    <p>Discover the latest trends in modern fashion collection.</p>
-                    <a href="#" class="explore-btn">Explore</a>
+                    <h2>Style effortlessly with fashionable trouser</h2>
+                    <p>Refresh your style a bit by adding these trousers, crafted to put your look together. Going to a
+                        professional meeting or on a relaxed outing, these designer pants help you look sharp.</p>
+                    <a href="{{ route('list', ['category' => $formalProducts->first()?->category?->slug]) }}"
+                        class="explore-btn">Explore</a>
                 </div>
             </div>
 
@@ -41,9 +44,11 @@
                 <div class="hero-overlay"></div>
 
                 <div class="hero-content">
-                    <h1>Winter Collection</h1>
-                    <p>Premium styles designed for comfort and elegance.</p>
-                    <a href="#" class="explore-btn">Explore</a>
+                    <h2>Comfort fit for a long journey </h2>
+                    <p>The shoppers will get trousers made from soft fabric and in cozy fits that keep them relaxed on their
+                        busy days. Make your longer commutes and hectic travel schedules unbothered.</p>
+                    <a href="{{ route('list', ['category' => $denimProducts->first()?->category?->slug]) }}"
+                        class="explore-btn">Explore</a>
                 </div>
             </div>
 
@@ -202,192 +207,272 @@
     </style>
 
     <div class="cloth-banner">
-   
- 
-    <div class="countdown">
- 
-    <div class="event-title">Annual sale event</div>
-    <div class="count">
-        <div class="time-box">
-            <div class="number">7</div>
-            <div class="label">Days</div>
+
+
+        <div class="countdown">
+
+            <div class="event-title">Annual sale event</div>
+            <div class="count">
+                <div class="time-box">
+                    <div class="number">7</div>
+                    <div class="label">Days</div>
+                </div>
+
+                <div class="time-box">
+                    <div class="number">13</div>
+                    <div class="label">Hours</div>
+                </div>
+
+                <div class="time-box">
+                    <div class="number">27</div>
+                    <div class="label">Minutes</div>
+                </div>
+
+                <div class="time-box">
+                    <div class="number">14</div>
+                    <div class="label">Seconds</div>
+                </div>
+            </div>
+            <button class="notify-btn">Get notified</button>
         </div>
- 
-        <div class="time-box">
-            <div class="number">13</div>
-            <div class="label">Hours</div>
-        </div>
- 
-        <div class="time-box">
-            <div class="number">27</div>
-            <div class="label">Minutes</div>
-        </div>
- 
-        <div class="time-box">
-            <div class="number">14</div>
-            <div class="label">Seconds</div>
-        </div>
-</div>
-        <button class="notify-btn">Get notified</button>
+
     </div>
- 
-   </div>
- 
-<style>
-.cloth-banner{
-    background:#182739;
-    border:1px solid #3b4a5b;
-    color:#fff;
-    height:70px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
-   }
- 
-.event-title{
-    font-size:16px;
-    font-weight:500;
-    white-space:nowrap;
-}
- 
-.countdown{
-    display:flex;
-    align-items:center;
-    flex:1;
-    justify-content:center;
-    gap: 69px;
-}
- 
-.count {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
- 
-.time-box{
-    text-align:center;
-    min-width:70px;
-    position:relative;
-}
- 
-.time-box:not(:last-child)::after{
-    content:"";
-    position:absolute;
-    right:0;
-    top:50%;
-    transform:translateY(-50%);
-    width:1px;
-    height:36px;
-    background:rgba(255,255,255,0.2);
-}
- 
-.number{
-    font-size:18px;
-    font-weight:700;
-    line-height:1;
-    margin-bottom:4px;
-}
- 
-.label{
-    font-size:11px;
-    color:#c7d0db;
-}
- 
-.notify-btn{
-    background:#c7903d;
-    color:#fff;
-    border:none;
-    padding:10px 18px;
-    cursor:pointer;
-    font-size:13px;
-    border-radius:2px;
-    transition:0.3s;
-}
- 
-.notify-btn:hover{
-    background:#b27f34;
-}
- 
-@media (max-width: 768px) {
- 
-    .banner{
-        height: auto;
-        padding: 15px;
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
- 
-    .cloth-banner {
-    background: #182739;
-    border: 1px solid #3b4a5b;
-    color: #fff;
-    height:auto;
-    display: grid;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    justify-content: center;
-    gap: 10px;
-}
- 
-   .event-title{
-    font-size: 26px !important;
-    font-weight: 500;
-    white-space: nowrap;
-    margin-bottom: 10px;
-    text-align:center;
-    }
- 
-    .countdown{
-        display: block;
-        width: 100%;
-        justify-content: space-between;
-        gap: 60px;
-    }
- 
-    .time-box{
-        flex: 1;
-        min-width: auto;
-    }
- 
-    .time-box:not(:last-child)::after{
-        height: 30px;
-        right: 10px;
- 
-    }
- 
-    .number{
-        font-size: 16px;
-    }
- 
-    .label{
-        font-size: 10px;
-    }
- 
-    .notify-btn{
-        width: 303px;
-        margin-top: 10px;
-        padding: 12px;
-    }
-}
+
+    <style>
+        .cloth-banner {
+            background: #182739;
+            border: 1px solid #3b4a5b;
+            color: #fff;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .event-title {
+            font-size: 16px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .countdown {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+            gap: 69px;
+        }
+
+        .count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-box {
+            text-align: center;
+            min-width: 70px;
+            position: relative;
+        }
+
+        .time-box:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .number {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .label {
+            font-size: 11px;
+            color: #c7d0db;
+        }
+
+        .notify-btn {
+            background: #c7903d;
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .notify-btn:hover {
+            background: #b27f34;
+        }
+
+        @media (max-width: 768px) {
+
+            .banner {
+                height: auto;
+                padding: 15px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .cloth-banner {
+                background: #182739;
+                border: 1px solid #3b4a5b;
+                color: #fff;
+                height: auto;
+                display: grid;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 20px;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .event-title {
+                font-size: 26px !important;
+                font-weight: 500;
+                white-space: nowrap;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .countdown {
+                display: block;
+                width: 100%;
+                justify-content: space-between;
+                gap: 60px;
+            }
+
+            .time-box {
+                flex: 1;
+                min-width: auto;
+            }
+
+            .time-box:not(:last-child)::after {
+                height: 30px;
+                right: 10px;
+
+            }
+
+            .number {
+                font-size: 16px;
+            }
+
+            .label {
+                font-size: 10px;
+            }
+
+            .notify-btn {
+                width: 303px;
+                margin-top: 10px;
+                padding: 12px;
+            }
+        }
+    </style>
+
+    <section class="welcome-banner">
+        <div class="welcome-container">
+            <h1>Welcome to SR Fashioners – Where Style Meets Comfort!</h1>
+        </div>
+    </section>
+    <style>
+        .welcome-banner {
+            margin: 60px 0;
+            padding: 50px 25px;
+            background: linear-gradient(135deg, #c79a57, #d9b06f);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .welcome-banner::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(-45deg,
+                    rgba(255, 255, 255, 0.04) 0px,
+                    rgba(255, 255, 255, 0.04) 2px,
+                    transparent 2px,
+                    transparent 10px);
+            pointer-events: none;
+        }
+
+        .welcome-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-banner h1 {
+            color: #fff;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.3;
+            margin: 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Tablet */
+        @media (max-width: 768px) {
+            .welcome-banner {
+                margin: 40px 15px;
+                padding: 40px 20px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 576px) {
+            .welcome-banner {
+                margin: 30px 10px;
+                padding: 30px 15px;
+                border-radius: 10px;
+            }
+
+            .welcome-banner h1 {
+                line-height: 1.4;
+            }
+        }
     </style>
 
     <section class="cotton-pants">
         <div class="section-header">
-            <h2>Cotton Pants</h2>
+            <div class="header-top">
+                <h2>Style effortlessly with fashionable trouser</h2>
 
-            <a href="{{ route('list', ['category' => 'cotton']) }}" class="view-all">
-                View All
-                <span>→</span>
-            </a>
+                <a href="{{ route('list', ['category' => 'cotton']) }}" class="view-all">
+                    View All <span>→</span>
+                </a>
+            </div>
+
+            <p>
+                Refresh your style a bit by adding these trousers,
+                crafted to put your look together. <br>Going to a professional
+                meeting or on a relaxed outing, these designer pants help you look sharp.
+            </p>
         </div>
 
         <div class="gallery-grid">
             @foreach ($cottonProducts as $index => $product)
                 <div class="grid-item {{ $index == 0 ? 'large' : '' }}">
-                    <img src="{{ asset($product->main_image) }}" alt="{{ $product->name }}">
+                    <a
+                        href="{{ route('product.detail', [
+                            'category' => $product->subCategory?->slug ?? ($product->category?->slug ?? 'product'),
+                            'product_name' => $product->slug ?? \Illuminate\Support\Str::slug($product->name),
+                        ]) }}">
+                        <img src="{{ asset($product->main_image) }}" alt="{{ $product->name }}">
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -402,8 +487,9 @@
 
         .section-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+
+            align-items: flex-start;
             margin-bottom: 20px;
         }
 
@@ -411,6 +497,24 @@
             font-size: 28px;
             color: #b38b59;
             font-weight: 600;
+            margin: 0;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .view-all {
+            margin-left: auto;
+        }
+
+        .section-header p {
+            margin: 0;
+            text-align: left;
+
+            margin-top: 10px;
         }
 
         .view-all {
@@ -441,25 +545,32 @@
             background: #ddd;
         }
 
+        /* Make entire image area clickable */
+        .grid-item a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
         .grid-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-
+            display: block;
             transition: transform 0.6s ease;
         }
 
-        /* Zoom Effect */
-        .grid-item:hover img {
-            transform: scale(1.12);
-        }
-
+        /* Hover Overlay */
         .grid-item::after {
             content: "";
             position: absolute;
             inset: 0;
             background: rgba(0, 0, 0, 0);
-            transition: 0.4s;
+            transition: background 0.4s ease;
+            pointer-events: none;
+            /* Important */
         }
 
         .grid-item:hover::after {
@@ -467,9 +578,11 @@
         }
 
         .grid-item:hover img {
-            transform: scale(1.15);
+            transform: scale(1.12);
+            cursor: pointer;
         }
 
+        /* Mobile */
         @media (max-width: 768px) {
             .gallery-grid {
                 grid-template-columns: 1fr 1fr;
@@ -489,19 +602,31 @@
     </style>
 
     <section class="travel-series">
-        <div class="heading">
-            <h2>Travel Series Pants</h2>
+        <div class="section-header">
+            <div class="header-top">
+                <h2>Comfort fit for a long journey </h2>
 
-            <a href="{{ route('list', ['category' => $travelProducts->first()?->category?->slug]) }}" class="view-all">
-                View All
-                <span>→</span>
-            </a>
+                <a href="{{ route('list', ['category' => $travelProducts->first()?->category?->slug]) }}" class="view-all">
+                    View All <span>→</span>
+                </a>
+            </div>
+
+            <p>
+                The shoppers will get trousers made from soft fabric and in cozy fits that keep them <br>
+                relaxed on their busy days. Make your longer commutes and hectic travel schedules unbothered.
+            </p>
         </div>
 
         <div class="travel-grid">
             @foreach ($travelProducts as $product)
                 <div class="card">
-                    <img src="{{ asset($product->main_image) }}" alt="{{ $product->name }}">
+                    <a
+                        href="{{ route('product.detail', [
+                            'category' => $product->subCategory?->slug ?? ($product->category?->slug ?? 'product'),
+                            'product_name' => $product->slug ?? \Str::slug($product->name),
+                        ]) }}">
+                        <img src="{{ asset($product->main_image) }}" alt="{{ $product->name }}">
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -624,18 +749,30 @@
 
     <section class="formal-pants">
         <div class="section-header">
-            <h2>Formal Pants</h2>
+            <div class="header-top">
+                <h2>Stunning collection and compelling prices </h2>
 
-            <a href="{{ route('list', ['category' => $formalProducts->first()?->category?->slug]) }}" class="view-all">
-                View All
-                <span>→</span>
-            </a>
+                <a href="{{ route('list', ['category' => $formalProducts->first()?->category?->slug]) }}" class="view-all">
+                    View All <span>→</span>
+                </a>
+            </div>
+
+            <p>
+                The shoppers will get a wide range of pants and trousers that give versatile looks. <br>
+                Explore different looks and stand out with your looks without disturbing the budget.
+            </p>
         </div>
 
         <div class="formal-grid">
             @foreach ($formalProducts as $product)
                 <div class="item">
-                    <img src="{{ asset($product->main_image) }}" alt="{{ $product->name }}">
+                    <a
+                        href="{{ route('product.detail', [
+                            'category' => $product->subCategory?->slug ?? ($product->category?->slug ?? 'product'),
+                            'product_name' => $product->slug ?? \Str::slug($product->name),
+                        ]) }}">
+                        <img src="{{ asset($product->main_image) }}" alt="{{ $product->name }}">
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -651,7 +788,7 @@
         .section-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 20px;
         }
 
@@ -674,13 +811,13 @@
         .formal-grid {
             background: #efe9df;
             padding: 12px;
-
             display: grid;
             grid-template-columns: 1fr 2.4fr 1fr;
             grid-template-rows: 200px 200px;
             gap: 12px;
         }
 
+        /* Position classes */
         .center {
             grid-column: 2;
             grid-row: 1 / span 2;
@@ -706,42 +843,45 @@
             grid-row: 2;
         }
 
-        /* IMAGE EFFECT */
-
+        /* CLICKABLE CARD */
         .item {
-            overflow: hidden;
+            display: block;
             position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            background: #ddd;
         }
 
+        /* IMAGE */
         .item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-
-            transition: transform .7s ease;
+            transition: transform 0.7s ease;
         }
 
+        /* HOVER ZOOM */
         .item:hover img {
             transform: scale(1.12);
         }
 
-        /* Optional luxury overlay */
-
+        /* OVERLAY */
         .item::after {
             content: "";
             position: absolute;
             inset: 0;
             background: rgba(0, 0, 0, 0);
-            transition: .4s;
+            transition: background 0.4s ease;
+            pointer-events: none;
         }
 
         .item:hover::after {
-            background: rgba(0, 0, 0, .05);
+            background: rgba(0, 0, 0, 0.05);
         }
 
+        /* MOBILE */
         @media (max-width: 768px) {
-
             .formal-pants {
                 padding: 30px 16px;
             }
@@ -753,7 +893,6 @@
             .formal-grid {
                 grid-template-columns: 1fr 1fr;
                 grid-template-areas:
-
                     "left-top left-bottom"
                     "center center"
                     "right-top right-bottom";
@@ -762,10 +901,9 @@
 
             .center {
                 grid-area: center;
-                height: 188px;
+                height: 280px;
             }
 
-            /* Remaining images */
             .left-top {
                 grid-area: left-top;
                 height: 180px;
@@ -785,29 +923,34 @@
                 grid-area: right-bottom;
                 height: 180px;
             }
-
-            .item img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
         }
     </style>
 
     <section class="shorts-section">
         <div class="section-header">
-            <h2>Shorts/Nickers</h2>
-            <a href="{{ route('list', ['category' => $shortsProducts->first()?->category?->slug]) }}" class="view-all">
-                View All
-                <span>→</span>
-            </a>
+            <div class="header-top">
+                <h2>Elevate your wardrobe and confidence </h2>
+
+                <a href="{{ route('list', ['category' => $shortsProducts->first()?->category?->slug]) }}" class="view-all">
+                    View All <span>→</span>
+                </a>
+            </div>
+
+            <p>
+                A good fit can boost confidence at any occasion. Enhance the style with the trousers<br>
+                that have a combination of comfort, quality, and contemporary style.
+            </p>
         </div>
 
         <div class="products-grid">
             @foreach ($shortsProducts as $product)
-                <div class="product-card">
+                <a class="product-card"
+                    href="{{ route('product.detail', [
+                        'category' => $product->subCategory?->slug ?? ($product->category?->slug ?? 'product'),
+                        'product_name' => $product->slug ?? \Str::slug($product->name),
+                    ]) }}">
                     <img src="{{ asset($product->main_image) }}" alt="{{ $product->name }}">
-                </div>
+                </a>
             @endforeach
         </div>
     </section>
@@ -822,7 +965,7 @@
         .section-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 20px;
         }
 
@@ -913,17 +1056,29 @@
 
     <section class="denim-section">
         <div class="section-header">
-            <h2>Denim - Only Special Black</h2>
-            <a href="{{ route('list', ['category' => $denimProducts->first()?->category?->slug]) }}">
-                View All →
-            </a>
+            <div class="header-top">
+                <h2>Elevate your wardrobe and confidence </h2>
+
+                <a href="{{ route('list', ['category' => $denimProducts->first()?->category?->slug]) }}">
+                    View All <span>→</span>
+                </a>
+            </div>
+
+            <p>
+                A good fit can boost confidence at any occasion. Enhance the style with the trousers<br>
+                that have a combination of comfort, quality, and contemporary style.
+            </p>
         </div>
 
         <div class="denim-grid">
             @foreach ($denimProducts as $product)
-                <div class="item">
+                <a class="item"
+                    href="{{ route('product.detail', [
+                        'category' => $product->subCategory?->slug ?? ($product->category?->slug ?? 'product'),
+                        'product_name' => $product->slug ?? \Str::slug($product->name),
+                    ]) }}">
                     <img src="{{ asset($product->main_image) }}" alt="{{ $product->name }}">
-                </div>
+                </a>
             @endforeach
         </div>
     </section>
@@ -939,7 +1094,7 @@
         .section-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 25px;
         }
 
@@ -1060,7 +1215,7 @@
 
     <section class="clients-section">
         <div class="container">
-            <h2 class="section-title">Our Clients</h2>
+            <h2 class="section-title">Our Brands</h2>
 
             <div class="clients-wrapper owl-carousel">
                 <div class="client-item">
